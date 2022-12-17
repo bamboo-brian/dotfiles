@@ -1,0 +1,93 @@
+local o = vim.o
+local g = vim.g
+local fn = vim.fn
+
+g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
+g.loaded_python_provider = 0
+g.loaded_matchit = 1
+
+vim.g.mapleader = " "
+
+o.grepprg = "rg --hidden --vimgrep --smart-case --"
+o.hidden = true
+o.splitbelow = true
+o.splitright = true
+o.mouse = "a"
+o.updatetime = 250
+o.ignorecase = true
+o.smartcase = true
+o.formatoptions = ""
+o.shiftwidth = 4
+o.tabstop = 4
+o.expandtab = false
+o.scrolloff = 8
+
+o.termguicolors = true
+o.number = true
+o.relativenumber = true
+o.signcolumn = "yes:1"
+o.showmode = false
+o.hlsearch = false
+o.cursorline = true
+o.title = true
+o.laststatus = 3
+
+o.foldenable = false
+o.foldmethod = "expr"
+o.foldexpr = "nvim_treesitter#foldexpr()"
+
+o.listchars = "eol:↴,tab:├┈"
+
+o.completeopt = "menu,menuone,noselect"
+
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+	fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+end
+vim.cmd([[packadd packer.nvim]])
+local packer = require("packer")
+
+packer.init()
+packer.reset()
+
+packer.use("wbthomason/packer.nvim")
+
+packer.use("tpope/vim-repeat")
+
+packer.use("gpanders/editorconfig.nvim")
+
+packer.use({
+	"lewis6991/gitsigns.nvim",
+	requires = { "nvim-lua/plenary.nvim" },
+	config = function()
+		require("gitsigns").setup({
+			keymaps = {},
+		})
+	end,
+})
+
+packer.use("tpope/vim-fugitive")
+
+packer.use({
+	"sindrets/diffview.nvim",
+	requires = { "nvim-lua/plenary.nvim" },
+})
+
+local modules = {
+	"appearance",
+	"startup",
+	"completion",
+	"navigation",
+	"motion",
+	"treesitter",
+	"lsp",
+	"testing",
+}
+
+for _, m in ipairs(modules) do
+	package.loaded[m] = nil
+	require(m)
+end
+
+vim.api.nvim_set_keymap("n", "<leader>R", "<cmd>source ~/.config/nvim/init.lua<CR>", { noremap = true })
