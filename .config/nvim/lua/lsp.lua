@@ -58,6 +58,7 @@ use({
 				cmd = {"elixir-ls"},
 			},
 			gopls = {},
+			tsserver = {},
 		}
 
 
