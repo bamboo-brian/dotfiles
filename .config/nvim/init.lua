@@ -74,6 +74,8 @@ packer.use({
 	requires = { "nvim-lua/plenary.nvim" },
 })
 
+packer.use("mbbill/undotree")
+
 local modules = {
 	"appearance",
 	"startup",
@@ -91,3 +93,4 @@ for _, m in ipairs(modules) do
 end
 
 vim.api.nvim_set_keymap("n", "<leader>R", "<cmd>source ~/.config/nvim/init.lua<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { noremap = true })
