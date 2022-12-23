@@ -87,6 +87,14 @@ return {
 		},
 		tabs = {
 			{
+				key = 'a',
+				action = act.SpawnTab('CurrentPaneDomain'),
+			},
+			{
+				key = 'q',
+				action = act.CloseCurrentTab({ confirm = true }),
+			},
+			{
 				key = 'n',
 				action = act.ActivateTabRelative(1),
 			},
