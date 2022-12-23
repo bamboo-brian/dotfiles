@@ -27,6 +27,11 @@ use({
 
 		local on_attach = function(client, bufnr)
 			require("illuminate").on_attach(client)
+			local opts = { noremap = true }
+			vim.api.nvim_set_keymap("n", "gd", "<cmd>Telescope lsp_definitions show_line=false initial_mode=normal<CR>", opts)
+			vim.api.nvim_set_keymap("n", "gD", "<cmd>Telescope lsp_type_definitions show_line=false initial_mode=normal<CR>", opts)
+			vim.api.nvim_set_keymap("n", "gr", "<cmd>Telescope lsp_references show_line=false initial_mode=normal<CR>", opts)
+			vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 		end
 
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -51,9 +56,14 @@ use({
 		servers["bashls"] = {}
 		servers["eslint"] = {}
 
-		for server, config in pairs(servers) do
+		for server_name, config in pairs(servers) do
 			config = vim.tbl_deep_extend("keep", config, base_config)
-			lspconfig[server].setup(config)
+			local server = lspconfig[server_name]
+			local cmd = config.cmd and config.cmd[1] or 
+				server.document_config.default_config.cmd[1]
+			if (vim.fn.executable(cmd)) then
+				server.setup(config)
+			end
 		end
 	end,
 })
@@ -63,18 +73,37 @@ use({
 	config = function()
 		local null_ls = require("null-ls")
 
-		local sources = {
-			null_ls.builtins.diagnostics.phpcs,
-			null_ls.builtins.formatting.phpcbf,
-			null_ls.builtins.diagnostics.cspell.with({
+		local selected_sources = {
+			diagnostics = {
+				phpcs = {},
+				cspell = {
 				diagnostic_config = {
 					virtual_text = false,
 					signs = false,
-				},
-			}),
-			null_ls.builtins.code_actions.cspell,
-			null_ls.builtins.formatting.stylua,
+				}
+			},
+			},
+			code_actions = {
+				cspell = {},
+			},
+			formatting = {
+				phpcbf = {},
+				stylua = {},
+			},
 		}
+
+		local sources = {}
+
+		for type, type_sources in pairs(selected_sources) do
+			for source, options in pairs(type_sources) do
+				local builtin = null_ls.builtins[type][source]
+				local command = builtin._opts and builtin._opts.command or builtin.name
+				if vim.fn.executable(command) then
+					table.insert(sources, builtin.with(options))
+				end
+			end
+		end
+
 		null_ls.setup({
 			sources = sources,
 			fallback_severity = vim.diagnostic.severity.INFO,
@@ -91,15 +120,12 @@ vim.api.nvim_set_keymap(
 	'<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>',
 	opts
 )
+
+vim.api.nvim_set_keymap("n", "<leader>F", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 3000, filter = function(client) return client.name ~= 'intelephense' end })<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>.", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>F", "<cmd>lua vim.lsp.buf.format({ timeout_ms = 3000, filter = function(client) return client.name ~= 'intelephense' end })<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>Telescope diagnostics<CR>", opts)
-vim.api.nvim_set_keymap("n", "gd", "<cmd>Telescope lsp_definitions show_line=false initial_mode=normal<CR>", opts)
-vim.api.nvim_set_keymap("n", "gD", "<cmd>Telescope lsp_type_definitions show_line=false initial_mode=normal<CR>", opts)
-vim.api.nvim_set_keymap("n", "gr", "<cmd>Telescope lsp_references show_line=false initial_mode=normal<CR>", opts)
-vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 vim.api.nvim_set_keymap("i", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>S", '<cmd>lua require"null-ls".toggle{name = "cspell"}<CR>', opts)

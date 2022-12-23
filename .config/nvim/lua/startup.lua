@@ -22,22 +22,17 @@ use({
 		local padDesc = function(str)
 			return string.format("%-30s", str)
 		end
-		db.custom_center = {
-			{
-				icon = padIcon(""),
-				desc = padDesc("Payroll Gateway"),
-				action = "source ~/.local/share/nvim/sessions/payroll-gateway.vim",
-			},
-			{
-				icon = padIcon(""),
-				desc = padDesc("Main"),
-				action = "source ~/.local/share/nvim/sessions/main.vim",
-			},
-			{
-				icon = padIcon(""),
-				desc = padDesc("Neovim Config"),
-				action = "source ~/.local/share/nvim/sessions/nvim-config.vim",
-			},
-		}
+		local ok, items = pcall(require, 'menu')
+		if not ok then return end
+
+		local custom_center = {}
+		for _, item in ipairs(items) do
+			table.insert(custom_center, {
+				icon = padIcon(item.icon),
+				desc = padDesc(item.desc),
+				action = item.action
+			})
+		end
+		db.custom_center = custom_center
 	end,
 })
