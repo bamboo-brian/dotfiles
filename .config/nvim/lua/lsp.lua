@@ -41,20 +41,25 @@ use({
 			capabilities = capabilities,
 		}
 
-		local servers = {}
-
-		servers["intelephense"] = {
-			settings = {
-				intelephense = {
-					format = {
-						enable = false,
-						braces = "k&r",
+		local servers = {
+			intelephense = {
+				settings = {
+					intelephense = {
+						format = {
+							enable = false,
+							braces = "k&r",
+						},
 					},
 				},
 			},
+			bashls = {},
+			eslint = {},
+			elixirls = {
+				cmd = {"elixir-ls"},
+			},
+			gopls = {},
 		}
-		servers["bashls"] = {}
-		servers["eslint"] = {}
+
 
 		for server_name, config in pairs(servers) do
 			config = vim.tbl_deep_extend("keep", config, base_config)
