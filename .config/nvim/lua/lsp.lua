@@ -59,6 +59,9 @@ use({
 			},
 			gopls = {},
 			tsserver = {},
+			omnisharp = {
+				cmd = {"OmniSharp"},
+			},
 		}
 
 
