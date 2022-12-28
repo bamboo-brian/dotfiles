@@ -59,6 +59,7 @@ use({
 			},
 			gopls = {},
 			tsserver = {},
+			pyright = {},
 		}
 
 
