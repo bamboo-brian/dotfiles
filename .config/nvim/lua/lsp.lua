@@ -62,6 +62,7 @@ use({
 			omnisharp = {
 				cmd = {"OmniSharp"},
 			},
+			pyright = {},
 		}
 
 
@@ -70,7 +71,7 @@ use({
 			local server = lspconfig[server_name]
 			local cmd = config.cmd and config.cmd[1] or 
 				server.document_config.default_config.cmd[1]
-			if (vim.fn.executable(cmd)) then
+			if vim.fn.executable(cmd) == 1 then
 				server.setup(config)
 			end
 		end
@@ -107,7 +108,7 @@ use({
 			for source, options in pairs(type_sources) do
 				local builtin = null_ls.builtins[type][source]
 				local command = builtin._opts and builtin._opts.command or builtin.name
-				if vim.fn.executable(command) then
+				if vim.fn.executable(command) == 1 then
 					table.insert(sources, builtin.with(options))
 				end
 			end
