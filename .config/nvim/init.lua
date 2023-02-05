@@ -31,7 +31,7 @@ o.showmode = false
 o.hlsearch = false
 o.cursorline = true
 o.title = true
-o.laststatus = 3
+o.laststatus = 2
 
 o.foldenable = false
 o.foldmethod = "expr"
@@ -85,6 +85,7 @@ local modules = {
 	"treesitter",
 	"lsp",
 	"testing",
+	"debug",
 }
 
 for _, m in ipairs(modules) do

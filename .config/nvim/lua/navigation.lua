@@ -55,6 +55,12 @@ use({
 			'<cmd>lua require("telescope.builtin").live_grep()<cr>',
 			{ noremap = true }
 		)
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>*",
+			'<cmd>lua require("telescope.builtin").grep_string()<cr>',
+			{ noremap = true }
+		)
 	end,
 })
 

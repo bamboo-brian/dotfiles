@@ -23,7 +23,10 @@ export VISUAL=nvim
 export EDITOR=nvim
 export PAGER=bat
 alias e=$EDITOR
+alias ef='e $(fzf)'
+alias z=zellij
 alias phpstorm=nvim
+alias branches="git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)' | gum filter"
 
 
 NNN_PLUG="f:finder;p:preview-tui"
@@ -57,7 +60,32 @@ zinit ice as"command" from"gh-r" \
           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
           atpull"%atclone" src"init.zsh"
 zinit light starship/starship
-#
+
+# Zellij
+zinit ice from"gh-r" as"command" \
+	atclone"./zellij setup --generate-completion zsh > _zellij" \
+	atpull"%atclone" \
+	atload"source ./_zellij &> /dev/null"
+zinit load zellij-org/zellij
+
+# fzf
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf-bin
+
+# fd
+zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+zinit light sharkdp/fd
+
+# bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
+
+# asdf
+zinit ice from"gh" as"null" \
+	atclone"cp -R . $HOME/.asdf" \
+	atpull"%atclone" 
+zinit light asdf-vm/asdf
+
 # Some plugins for completions and shortcut aliases
 zinit wait lucid for \
   OMZL::clipboard.zsh \

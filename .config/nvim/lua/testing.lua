@@ -11,7 +11,11 @@ use({
 	config = function()
 		require("neotest").setup({
 			adapters = {
-				require("neotest-phpunit"),
+				require("neotest-phpunit")({
+					phpunit_cmd = function()
+						return "phpunit"
+					end
+				}),
 			},
 		})
 		vim.api.nvim_set_keymap("n", "<leader>tt", '<cmd>lua require("neotest").run.run()<CR>', { noremap = true })

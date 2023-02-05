@@ -5,10 +5,10 @@ use({
 	config = function()
 		require("nightfox").setup({
 			options = {
-				transparent = true,
+				transparent = false,
 			},
 		})
-		vim.cmd([[colorscheme carbonfox]])
+		vim.cmd([[colorscheme terafox]])
 
 		local reference_highlight = { bold = true, underdotted = true }
 		vim.api.nvim_set_hl(0, "LspReferenceText", reference_highlight)
