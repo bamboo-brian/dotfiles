@@ -78,7 +78,6 @@ packer.use("mbbill/undotree")
 
 local modules = {
 	"appearance",
-	"startup",
 	"completion",
 	"navigation",
 	"motion",

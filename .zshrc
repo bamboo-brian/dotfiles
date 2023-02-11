@@ -25,9 +25,8 @@ export PAGER=bat
 alias e=$EDITOR
 alias ef='e $(fzf)'
 alias z=zellij
-alias phpstorm=nvim
-alias branches="git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)' | gum filter"
-
+alias zp="zellij --layout project"
+alias branches="git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)' | fzf"
 
 NNN_PLUG="f:finder;p:preview-tui"
 NNN_FIFO=/tmp/nnn.fifo
@@ -61,6 +60,11 @@ zinit ice as"command" from"gh-r" \
           atpull"%atclone" src"init.zsh"
 zinit light starship/starship
 
+# Neovim
+zinit ice from"gh-r" as"program" \
+	sbin"**/nvim"
+zinit light neovim/neovim
+
 # Zellij
 zinit ice from"gh-r" as"command" \
 	atclone"./zellij setup --generate-completion zsh > _zellij" \
@@ -68,9 +72,14 @@ zinit ice from"gh-r" as"command" \
 	atload"source ./_zellij &> /dev/null"
 zinit load zellij-org/zellij
 
+# exa
+zinit ice wait"2" lucid from"gh-r" as"program" \
+	sbin"**/exa"
+zinit light ogham/exa
+
 # fzf
 zinit ice from"gh-r" as"program"
-zinit light junegunn/fzf-bin
+zinit light junegunn/fzf
 
 # fd
 zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
@@ -80,11 +89,17 @@ zinit light sharkdp/fd
 zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 
+# ripgrep
+zinit ice from"gh-r" as"program" \
+	sbin"**/rg"
+zinit light BurntSushi/ripgrep
+
 # asdf
 zinit ice from"gh" as"null" \
 	atclone"cp -R . $HOME/.asdf" \
 	atpull"%atclone" 
 zinit light asdf-vm/asdf
+
 
 # Some plugins for completions and shortcut aliases
 zinit wait lucid for \

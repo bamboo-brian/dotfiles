@@ -15,18 +15,4 @@ keybinds {
 
 pane_frames false
 
-themes {
-	default {
-		fg 4
-        bg 2
-        black 8
-        red 1
-        green 2
-        yellow 3
-        blue 4
-        magenta 5
-        cyan 6
-        white 7
-        orange 208
-	}
-}
+theme "carbonfox"

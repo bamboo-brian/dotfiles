@@ -5,10 +5,10 @@ use({
 	config = function()
 		require("nightfox").setup({
 			options = {
-				transparent = false,
+				transparent = true,
 			},
 		})
-		vim.cmd([[colorscheme terafox]])
+		vim.cmd([[colorscheme carbonfox]])
 
 		local reference_highlight = { bold = true, underdotted = true }
 		vim.api.nvim_set_hl(0, "LspReferenceText", reference_highlight)
@@ -49,7 +49,7 @@ use({
 
 use({
 	"nvim-lualine/lualine.nvim",
-	requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	requires = { "nvim-tree/nvim-web-devicons", opt = true },
 	config = function()
 		require("lualine").setup()
 	end,
