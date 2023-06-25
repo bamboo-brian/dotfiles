@@ -41,7 +41,7 @@ use({
 				},
 			},
 		})
-		require('telescope').load_extension('fzf')
+		require("telescope").load_extension("fzf")
 
 		vim.api.nvim_set_keymap(
 			"n",
@@ -71,17 +71,37 @@ use({
 	},
 	config = function()
 		require("nvim-tree").setup({
-			view = {
-				mappings = {
-					list = {
-						{ key = "-", action = "" },
-					},
-				},
-			},
+			on_attach = function(bufnr)
+				local api = require('nvim-tree.api')
+				api.config.mappings.default_on_attach(bufnr)
+				vim.keymap.set('n', '-', "<cmd>NvimTreeFindFileToggle<CR>", { buffer = bufnr})
+			end,
 		})
 
 		vim.api.nvim_set_keymap("n", "-", "<cmd>NvimTreeFindFileToggle<CR>", { noremap = true })
 	end,
+})
+
+use({
+	"ThePrimeagen/harpoon",
+	requires = {"nvim-telescope/telescope.nvim"},
+	config = function()
+		require('harpoon').setup({
+			menu = {
+				width = 120 
+			}
+		})
+		require("telescope").load_extension('harpoon')
+		vim.api.nvim_set_keymap("n", "<leader>m", "<cmd>lua require('harpoon.mark').add_file()<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>'", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>;", "<cmd>lua require('harpoon.ui').nav_next()<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>:", "<cmd>lua require('harpoon.ui').nav_prev()<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>2", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<leader>5", "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", { noremap = true })
+	end
 })
 
 vim.api.nvim_set_keymap("n", "<leader>ta", "<cmd>tabnew<CR>", { noremap = true })

@@ -13,6 +13,4 @@ keybinds {
 	}
 }
 
-pane_frames false
-
 theme "carbonfox"

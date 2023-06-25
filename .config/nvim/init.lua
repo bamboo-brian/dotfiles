@@ -29,7 +29,6 @@ o.relativenumber = true
 o.signcolumn = "yes:1"
 o.showmode = false
 o.hlsearch = false
-o.cursorline = true
 o.title = true
 o.laststatus = 2
 
@@ -62,7 +61,11 @@ packer.use({
 	requires = { "nvim-lua/plenary.nvim" },
 	config = function()
 		require("gitsigns").setup({
-			keymaps = {},
+			on_attach = function(bufnr)
+				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", { noremap = true })
+				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", { noremap = true })
+				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", { noremap = true })
+			end
 		})
 	end,
 })

@@ -126,8 +126,8 @@ zinit wait lucid for \
 zinit wait lucid for \
   blockf atpull"zinit creinstall -q ." \
     zsh-users/zsh-completions \
-  atinit"zicompinit;zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting
+   atinit"zicompinit;zicdreplay" \
+     zdharma-continuum/fast-syntax-highlighting
 
 # Start with Insert Mode Cursor
 echo -ne '\e[5 q'

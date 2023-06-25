@@ -2,10 +2,10 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 return {
 	font = wezterm.font 'DM Mono',
-	font_size = 18,
+	font_size = 14,
 	color_scheme = 'carbonfox',
 	term = 'wezterm',
-	window_background_opacity = .9,
+	window_background_opacity = .95,
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = true,
 	hide_tab_bar_if_only_one_tab = true,
