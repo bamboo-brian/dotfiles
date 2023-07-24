@@ -37,64 +37,28 @@ o.foldenable = false
 o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 
+o.list = true
 o.listchars = "eol:↴,tab:├┈,trail:█"
 
 o.completeopt = "menu,menuone,noselect"
 
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
-vim.cmd([[packadd packer.nvim]])
-local packer = require("packer")
+vim.opt.rtp:prepend(lazypath)
 
-packer.init()
-packer.reset()
-
-packer.use("wbthomason/packer.nvim")
-
-packer.use("tpope/vim-repeat")
-
-packer.use("gpanders/editorconfig.nvim")
-
-packer.use({
-	"lewis6991/gitsigns.nvim",
-	requires = { "nvim-lua/plenary.nvim" },
-	config = function()
-		require("gitsigns").setup({
-			on_attach = function(bufnr)
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", { noremap = true })
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", { noremap = true })
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", { noremap = true })
-			end
-		})
-	end,
-})
-
-packer.use("tpope/vim-fugitive")
-
-packer.use({
-	"sindrets/diffview.nvim",
-	requires = { "nvim-lua/plenary.nvim" },
-})
-
-packer.use("mbbill/undotree")
-
-local modules = {
-	"appearance",
-	"completion",
-	"navigation",
-	"motion",
-	"treesitter",
-	"lsp",
-	"testing",
-	"debug",
-}
-
-for _, m in ipairs(modules) do
-	package.loaded[m] = nil
-	require(m)
-end
+require("lazy").setup("plugins")
 
 vim.api.nvim_set_keymap("n", "<leader>R", "<cmd>source ~/.config/nvim/init.lua<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { noremap = true })
+
+vim.api.nvim_set_keymap("i", "<c-n>", '<cmd>lua require("cmp").select_next_item()<CR>', { noremap = true })
+vim.api.nvim_set_keymap("i", "<c-p>", '<cmd>lua require("cmp").select_prev_item()<CR>', { noremap = true })
