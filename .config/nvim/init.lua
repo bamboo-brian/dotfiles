@@ -27,6 +27,7 @@ o.termguicolors = true
 o.number = true
 o.relativenumber = true
 o.signcolumn = "yes:1"
+o.colorcolumn = "140"
 o.showmode = false
 o.hlsearch = false
 o.title = true
@@ -36,7 +37,7 @@ o.foldenable = false
 o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 
-o.listchars = "eol:↴,tab:├┈"
+o.listchars = "eol:↴,tab:├┈,trail:█"
 
 o.completeopt = "menu,menuone,noselect"
 
