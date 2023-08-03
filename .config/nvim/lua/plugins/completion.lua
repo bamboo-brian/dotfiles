@@ -46,5 +46,8 @@ return {
 			})
 		end,
 	},
-	"windwp/nvim-autopairs",
+	{
+		"windwp/nvim-autopairs",
+		config = true,
+	},
 }

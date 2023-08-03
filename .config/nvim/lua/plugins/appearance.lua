@@ -8,7 +8,10 @@ return {
 			vim.api.nvim_set_hl(0, "LspReferenceText", reference_highlight)
 			vim.api.nvim_set_hl(0, "LspReferenceRead", reference_highlight)
 			vim.api.nvim_set_hl(0, "LspReferenceWrite", reference_highlight)
+			vim.api.nvim_set_hl(0, "Search", { underline = true, italic = true })
+			vim.api.nvim_set_hl(0, "CurSearch", { underline = true })
 		end,
+		priority = 500
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -32,5 +35,6 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = true
 	},
 }

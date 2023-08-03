@@ -13,5 +13,8 @@ return {
 		end,
 	},
 	"tpope/vim-surround",
-	"phaazon/hop.nvim",
+	{
+		"phaazon/hop.nvim",
+		config = true,
+	},
 }

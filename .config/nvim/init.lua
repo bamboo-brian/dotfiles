@@ -29,7 +29,6 @@ o.relativenumber = true
 o.signcolumn = "yes:1"
 o.colorcolumn = "140"
 o.showmode = false
-o.hlsearch = false
 o.title = true
 o.laststatus = 2
 
