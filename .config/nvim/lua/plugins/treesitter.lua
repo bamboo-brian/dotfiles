@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		requires = { "nvim-treesitter/nvim-treesitter-textobjects", "nvim-treesitter/playground" },
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "nvim-treesitter/playground" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = "all",
