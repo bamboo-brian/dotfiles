@@ -37,4 +37,12 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = true
 	},
+	{
+		"NvChad/nvim-colorizer.lua",
+		opts = {
+			user_default_options = {
+				mode = "foreground",
+			},
+		}
+	}
 }
