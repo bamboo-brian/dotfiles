@@ -32,9 +32,7 @@ o.showmode = false
 o.title = true
 o.laststatus = 2
 
-o.foldenable = false
-o.foldmethod = "expr"
-o.foldexpr = "nvim_treesitter#foldexpr()"
+o.foldenable = true
 
 o.list = true
 o.listchars = "eol:↴,tab:├┈,trail:█"
@@ -55,9 +53,5 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-
-vim.api.nvim_set_keymap("n", "<leader>R", "<cmd>source ~/.config/nvim/init.lua<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { noremap = true })
-
-vim.api.nvim_set_keymap("i", "<c-n>", '<cmd>lua require("cmp").select_next_item()<CR>', { noremap = true })
-vim.api.nvim_set_keymap("i", "<c-p>", '<cmd>lua require("cmp").select_prev_item()<CR>', { noremap = true })
+require("keymaps")
+require("autocmds")
