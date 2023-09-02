@@ -1,24 +1,37 @@
 keybinds {
 	shared_except "normal" "locked" "entersearch" "renametab" "renamepane" {
-		bind "p" { SwitchToMode "pane"; }
+		bind "w" { SwitchToMode "pane"; }
 		bind "t" { SwitchToMode "tab"; }
 		bind "r" { SwitchToMode "resize"; }
 		bind "m" { SwitchToMode "move"; }
 		bind "/" { SwitchToMode "search"; }
+		unbind "Alt n"
 	}
 	normal clear-defaults=true {
 		bind "F12" { SwitchToMode "pane"; }
-		bind "Alt h" { MoveFocusOrTab "left"; }
+		bind "Alt h" { MoveFocus "left"; }
 		bind "Alt j" { MoveFocus "down"; }
 		bind "Alt k" { MoveFocus "up"; }
-		bind "Alt l" { MoveFocusOrTab "right"; }
+		bind "Alt l" { MoveFocus "right"; }
+		bind "Alt t" { SwitchToMode "tab"; }
 	}
 	pane {
 		unbind "d"
-		bind "s" { NewPane "Down"; }
-		bind "v" { NewPane "Right"; }
+		bind "s" { NewPane "Down"; SwitchToMode "normal"; }
+		bind "v" { NewPane "Right"; SwitchToMode "normal"; }
+		bind "Tab" { ToggleFloatingPanes; SwitchToMode "normal"; }
 	}
 	tab {
+		bind "a" { NewTab; SwitchToMode "normal"; }
+		bind "q" { CloseTab; SwitchToMode "normal"; }
+		bind "n" { GoToNextTab; SwitchToMode "normal"; }
+		bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
+		bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
+		bind "1" { GoToTab 1; SwitchToMode "normal"; }
+		bind "2" { GoToTab 2; SwitchToMode "normal"; }
+		bind "3" { GoToTab 3; SwitchToMode "normal"; }
+		bind "4" { GoToTab 4; SwitchToMode "normal"; }
+		bind "5" { GoToTab 5; SwitchToMode "normal"; }
 		bind "c" { SwitchToMode "renametab"; }
 	}
 	search {
