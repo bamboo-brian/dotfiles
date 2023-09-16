@@ -65,6 +65,16 @@ zinit ice from"gh-r" as"program" \
 	sbin"**/nvim"
 zinit light neovim/neovim
 
+# Charm
+export CHARM_HOST=charm.sephory.dev
+export CHARM_HTTP_PORT=443
+zinit ice from"gh-r" as"program" \
+	sbin"**/charm"
+zinit light charmbracelet/charm
+zinit ice from"gh-r" as"program" \
+	sbin"**/skate"
+zinit light charmbracelet/skate
+
 # Zellij
 zinit ice from"gh-r" as"command" \
 	atclone"./zellij setup --generate-completion zsh > _zellij" \
