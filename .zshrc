@@ -61,7 +61,7 @@ zinit ice as"command" from"gh-r" \
 zinit light starship/starship
 
 # Neovim
-zinit ice from"gh-r" as"program" \
+zinit ice from"gh-r" as"program" ver"v0.9.2" \
 	sbin"**/nvim"
 zinit light neovim/neovim
 
