@@ -23,15 +23,15 @@ export VISUAL=nvim
 export EDITOR=nvim
 export PAGER=bat
 alias e=$EDITOR
-alias ef='e $(fzf)'
+alias ef='e $(gum filter)'
 alias z=zellij
 alias zp="zellij --layout project"
-alias branches="git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)' | fzf"
+alias branches="git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)' | gum filter"
 
 NNN_PLUG="f:finder;p:preview-tui"
 NNN_FIFO=/tmp/nnn.fifo
 
-PATH="$HOME/.local/bin:$HOME/.scripts/tools:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+PATH="$HOME/.local/bin:$HOME/repos/bhr-toolbox/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -61,7 +61,7 @@ zinit ice as"command" from"gh-r" \
 zinit light starship/starship
 
 # Neovim
-zinit ice from"gh-r" as"program" ver"v0.9.2" \
+zinit ice from"gh-r" as"program" ver"v0.9.4" \
 	sbin"**/nvim"
 zinit light neovim/neovim
 
@@ -136,8 +136,8 @@ zinit wait lucid for \
 zinit wait lucid for \
   blockf atpull"zinit creinstall -q ." \
     zsh-users/zsh-completions \
-   atinit"zicompinit;zicdreplay" \
-     zdharma-continuum/fast-syntax-highlighting
+	atinit"zicompinit;zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting
 
 # Start with Insert Mode Cursor
 echo -ne '\e[5 q'

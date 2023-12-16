@@ -9,7 +9,6 @@ return {
 		},
 		config = function()
 			require("neotest").setup({
-				log_level = vim.log.levels.DEBUG,
 				adapters = {
 					require("neotest-phpunit")({
 						phpunit_cmd = function()

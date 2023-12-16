@@ -35,7 +35,7 @@ o.laststatus = 2
 o.foldenable = true
 
 o.list = true
-o.listchars = "eol:↴,tab:├┈,trail:█"
+o.listchars = "eol:↴,tab:▎ ,trail:█"
 
 o.completeopt = "menu,menuone,noselect"
 

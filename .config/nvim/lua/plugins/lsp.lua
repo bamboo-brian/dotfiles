@@ -1,6 +1,6 @@
 local lsp = vim.lsp
 
-lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, { underline = true })
+--lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, { underline = true })
 
 lsp.handlers["textDocument/signatureHelp"] =
 	lsp.with(lsp.handlers.signature_help, { focusable = false, border = "rounded" })

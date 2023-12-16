@@ -2,9 +2,10 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 return {
 	font = wezterm.font 'RobotoMono Nerd Font',
-	font_size = 15,
+	font_size = 16,
 	color_scheme = 'Bamboo',
 	term = 'wezterm',
+	window_decorations = "RESIZE",
 	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = true,
 	hide_tab_bar_if_only_one_tab = true,
