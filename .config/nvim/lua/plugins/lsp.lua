@@ -26,7 +26,6 @@ return {
 			local lspconfig = require("lspconfig")
 
 			local on_attach = function(client, bufnr)
-				require("illuminate").on_attach(client)
 				require("keymaps").lsp_attach_keymaps(bufnr)
 			end
 
@@ -42,19 +41,19 @@ return {
 					settings = {
 						intelephense = {
 							format = {
-								enable = false,
 								braces = "k&r",
 							},
 						},
 					},
 				},
+				--phpactor = {},
 				bashls = {},
 				eslint = {},
 				elixirls = {
 					cmd = {"elixir-ls"},
 				},
 				gopls = {},
-				tsserver = {},
+				ts_ls = {},
 				omnisharp = {
 					cmd = {"OmniSharp"},
 				},
@@ -74,22 +73,17 @@ return {
 		end,
 	},
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
+		dependencies = {
+			"davidmh/cspell.nvim"
+		},
 		config = function()
+			local cspell = require("cspell")
 			local null_ls = require("null-ls")
 
 			local selected_sources = {
 				diagnostics = {
 					phpcs = {},
-					cspell = {
-					diagnostic_config = {
-						virtual_text = false,
-						signs = false,
-					}
-				},
-				},
-				code_actions = {
-					cspell = {},
 				},
 				formatting = {
 					phpcbf = {},
@@ -97,7 +91,15 @@ return {
 				},
 			}
 
-			local sources = {}
+			local sources = {
+				cspell.diagnostics.with({
+						diagnostic_config = {
+							virtual_text = false,
+							signs = false,
+						}
+					}),
+				cspell.code_actions
+			}
 
 			for type, type_sources in pairs(selected_sources) do
 				for source, options in pairs(type_sources) do

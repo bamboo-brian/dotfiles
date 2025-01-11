@@ -3,7 +3,7 @@ local act = wezterm.action
 return {
 	font = wezterm.font 'RobotoMono Nerd Font',
 	font_size = 16,
-	color_scheme = 'Bamboo',
+	color_scheme = 'rose-pine-moon',
 	term = 'wezterm',
 	window_decorations = "RESIZE",
 	use_fancy_tab_bar = false,

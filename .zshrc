@@ -18,20 +18,53 @@ KEYTIMEOUT=1
 # promptsubst: Perform substitution in the prompt
 setopt autocd extendedglob notify promptsubst
 
+edit_modified() {
+	depth=${1:-1}
+	$EDITOR $(git diff --name-only "HEAD~$depth" | fzf)
+}
+
+edit_find() {
+	if [ "$@" ]; then
+		if test -f "$@"; then
+			file="$@"
+		else
+			file=$(fzf -f "$@" | fzf -1)
+		fi
+	else
+		file=$(fzf)
+	fi
+
+	if [ "$file" ]; then
+		$EDITOR $file
+	fi
+}
+
+edit_grep() {
+	if [ -z "$@" ]; then
+		return 1
+	fi
+
+	file=$(rg -li "$@" | \
+		fzf --preview-window 'up' --bind 'ctrl-d:preview-down' --bind 'ctrl-u:preview-up' --preview "egp '$@' {}")
+	
+	if [ "$file" ]; then
+		$EDITOR -c "/$@" $file
+	fi
+}
+
 # Sets NVIM as the default editor and lets you type 'e' to start nvim
 export VISUAL=nvim
 export EDITOR=nvim
 export PAGER=bat
 alias e=$EDITOR
-alias ef='e $(gum filter)'
+alias ef=edit_find
+alias eg=edit_grep
+alias em=edit_modified
+alias ediff='nvim +DiffviewOpen'
 alias z=zellij
 alias zp="zellij --layout project"
-alias branches="git for-each-ref --sort=-committerdate refs/heads --format='%(refname:short)' | gum filter"
 
-NNN_PLUG="f:finder;p:preview-tui"
-NNN_FIFO=/tmp/nnn.fifo
-
-PATH="$HOME/.local/bin:$HOME/repos/bhr-toolbox/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/go/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -45,7 +78,7 @@ fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-#
+
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
@@ -61,19 +94,9 @@ zinit ice as"command" from"gh-r" \
 zinit light starship/starship
 
 # Neovim
-zinit ice from"gh-r" as"program" ver"v0.9.4" \
+zinit ice from"gh-r" as"program" ver"stable" \
 	sbin"**/nvim"
 zinit light neovim/neovim
-
-# Charm
-export CHARM_HOST=charm.sephory.dev
-export CHARM_HTTP_PORT=443
-zinit ice from"gh-r" as"program" \
-	sbin"**/charm"
-zinit light charmbracelet/charm
-zinit ice from"gh-r" as"program" \
-	sbin"**/skate"
-zinit light charmbracelet/skate
 
 # Zellij
 zinit ice from"gh-r" as"command" \
@@ -113,6 +136,7 @@ zinit light asdf-vm/asdf
 
 # Some plugins for completions and shortcut aliases
 zinit wait lucid for \
+  OMZL::functions.zsh \
   OMZL::clipboard.zsh \
   OMZL::compfix.zsh \
   OMZL::completion.zsh \
@@ -141,3 +165,7 @@ zinit wait lucid for \
 
 # Start with Insert Mode Cursor
 echo -ne '\e[5 q'
+
+# direnv is an extension for your shell. It augments existing shells with a new feature that can load and unload environment variables depending on the current directory.
+# Peep https://direnv.net/ for more
+eval "$(direnv hook zsh)"

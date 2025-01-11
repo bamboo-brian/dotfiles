@@ -1,17 +1,15 @@
 return {
 	{
-		"EdenEast/nightfox.nvim",
-		config = function(plugin, opts)
-			vim.cmd([[colorscheme duskfox]])
-		end,
-		priority = 500
+		"rose-pine/neovim",
+		name = "rose-pine",
+		priority = 500,
+		opts = {
+			highlight_groups = {
+				SpecialKey = {fg = "overlay"},
+				NonText = {fg = "overlay"}
+			}
+		}
 	},
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {},
-	},
-	"RRethy/vim-illuminate",
 	{
 		"nanozuki/tabby.nvim",
 		config = function()
@@ -28,12 +26,4 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = true
 	},
-	{
-		"NvChad/nvim-colorizer.lua",
-		opts = {
-			user_default_options = {
-				mode = "foreground",
-			},
-		}
-	}
 }

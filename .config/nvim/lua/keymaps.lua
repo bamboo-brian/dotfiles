@@ -16,7 +16,6 @@ map("<leader><leader>", "<cmd>HopWordMW<CR>")
 map("<leader>j", "<cmd>HopLineStartAC<CR>")
 map("<leader>k", "<cmd>HopLineStartBC<CR>")
 map("<leader>f", "<cmd>HopChar1<CR>")
-map("<leader>/", "<cmd>HopPatternMW<CR>")
 
 -- Navigation
 nmap("<leader>ta", "<cmd>tabnew<CR>")
@@ -32,6 +31,9 @@ nmap("<leader>tP", "<cmd>-tabmove<CR>")
 nmap("<C-p>", require('telescope.builtin').find_files)
 nmap("<C-f>", require('telescope.builtin').live_grep)
 nmap("<leader>*", require('telescope.builtin').grep_string)
+nmap("<leader>/", function()
+	require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown())
+end)
 
 nmap("<leader>m", require('harpoon.mark').add_file)
 nmap("<leader>'", require('harpoon.ui').toggle_quick_menu)
@@ -60,23 +62,34 @@ nmap("<leader>tt", require("neotest").run.run)
 nmap("<leader>ts", require("neotest").summary.toggle)
 nmap("<leader>to", require("neotest").output.open)
 
+
+-- Yank
+nmap("<leader>ym", require("util").copyMethod)
+nmap("<leader>yc", require("util").copyClass)
+
 -- LSP
 return {
 	lsp_attach_keymaps = function(bufnr)
 		local bnmap = function(key, cmd) vim.keymap.set("n", key, cmd, { noremap = true, buffer = bufnr }) end
 		local bimap = function(key, cmd) vim.keymap.set("i", key, cmd, { noremap = true, buffer = bufnr }) end
 
-		bnmap("<leader>F", function() vim.lsp.buf.format({ timeout_ms = 3000, filter = function(client) return client.name ~= "intelephense" end }) end)
+		bnmap("<leader>F", function() vim.lsp.buf.format({ timeout_ms = 3000}) end)
 		bnmap("<leader>.", vim.lsp.buf.code_action)
 		bnmap("<leader>r", vim.lsp.buf.rename)
-		bnmap("<leader>dn", vim.diagnostic.goto_next)
-		bnmap("<leader>dp", vim.diagnostic.goto_prev)
-		bnmap("<leader>dd", '<cmd>Telescope diagnostics<CR>')
+		bnmap("]d", vim.diagnostic.goto_next)
+		bnmap("[d", vim.diagnostic.goto_prev)
+		bnmap("<leader>wd", '<cmd>Telescope diagnostics<CR>')
 		bnmap("<leader>S", function() require"null-ls".toggle{name = "cspell"} end)
 		bnmap("gd", "<cmd>Telescope lsp_definitions show_line=false initial_mode=normal<CR>")
 		bnmap("gD", "<cmd>Telescope lsp_type_definitions show_line=false initial_mode=normal<CR>")
 		bnmap("gr", "<cmd>Telescope lsp_references show_line=false initial_mode=normal<CR>")
 		bnmap("K", vim.lsp.buf.hover)
 		bimap("<c-k>", vim.lsp.buf.signature_help)
+	end,
+
+	gitsigns_attach_keymaps = function(bufnr)
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "]h", "<cmd>Gitsigns next_hunk<CR>", { noremap = true })
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "[h", "<cmd>Gitsigns prev_hunk<CR>", { noremap = true })
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", { noremap = true })
 	end
 }
