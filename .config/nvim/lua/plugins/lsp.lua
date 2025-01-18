@@ -64,8 +64,12 @@ return {
 			for server_name, config in pairs(servers) do
 				config = vim.tbl_deep_extend("keep", config, base_config)
 				local server = lspconfig[server_name]
-				local cmd = config.cmd and config.cmd[1] or 
-					server.document_config.default_config.cmd[1]
+				local cmd = (config.cmd and config.cmd[1]) or 
+					(server.default_config and server.default_config.cmd) or
+					(server.document_config and server.document_config.default_config and server.document_config.default_config.cmd[1])
+				if not cmd then
+					return
+				end
 				if vim.fn.executable(cmd) == 1 then
 					server.setup(config)
 				end

@@ -5,6 +5,11 @@ keybinds {
 		bind "r" { SwitchToMode "resize"; }
 		bind "m" { SwitchToMode "move"; }
 		bind "/" { SwitchToMode "search"; }
+		bind "1" { GoToTab 1; SwitchToMode "normal"; }
+		bind "2" { GoToTab 2; SwitchToMode "normal"; }
+		bind "3" { GoToTab 3; SwitchToMode "normal"; }
+		bind "4" { GoToTab 4; SwitchToMode "normal"; }
+		bind "5" { GoToTab 5; SwitchToMode "normal"; }
 		unbind "Alt n"
 	}
 	normal clear-defaults=true {
@@ -27,11 +32,6 @@ keybinds {
 		bind "n" { GoToNextTab; SwitchToMode "normal"; }
 		bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
 		bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
-		bind "1" { GoToTab 1; SwitchToMode "normal"; }
-		bind "2" { GoToTab 2; SwitchToMode "normal"; }
-		bind "3" { GoToTab 3; SwitchToMode "normal"; }
-		bind "4" { GoToTab 4; SwitchToMode "normal"; }
-		bind "5" { GoToTab 5; SwitchToMode "normal"; }
 		bind "c" { SwitchToMode "renametab"; }
 	}
 	search {
