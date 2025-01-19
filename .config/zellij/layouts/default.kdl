@@ -1,6 +1,40 @@
 layout {
-	pane
-	pane size=1 borderless=true {
-		plugin location="zellij:compact-bar"
-	}
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+                format_left   "{mode} {command_user_info} #[fg=4]{session}"
+                format_center "{tabs}"
+                format_right  "{command_git_branch} {datetime}"
+                format_space  ""
+
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=#6C7086]{char}"
+                border_position "top"
+
+                mode_normal  "#[bg=4] {name} #[fg=4]"
+                mode_pane  "#[bg=1] {name} #[fg=1]"
+                mode_locked    "#[fg=0]█"
+                mode_default_to_mode "pane"
+
+                tab_normal   "#[fg=8]#[bg=8] {name} #[fg=8]"
+                tab_active   "#[fg=4]#[bg=4,bold,italic] {name} #[fg=4]"
+
+                command_user_info_command     "bash -c \"echo $(whoami)@$(hostname)\""
+                command_user_info_format      "#[fg=4,bold] {stdout} "
+                command_user_info_interval    "0"
+                command_user_info_rendermode  "static"
+
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                command_git_branch_format      "#[fg=4] {stdout} "
+                command_git_branch_interval    "10"
+                command_git_branch_rendermode  "static"
+
+                datetime        "#[fg=8,bold] {format} "
+                datetime_format "%A, %d %b %Y %H:%M"
+                datetime_timezone "America/Phoenix"
+            }
+        }
+    }
 }

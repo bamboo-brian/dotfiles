@@ -16,6 +16,7 @@ keybinds {
 		unbind "z"
 	}
 	locked {
+		unbind "Ctrl g"
 		bind "Alt Esc" { WriteChars "[24;3~"; TogglePaneFrames; SwitchToMode "normal"; }
 		bind "Alt F12" { WriteChars "[24;3~"; TogglePaneFrames; SwitchToMode "normal"; }
 	}
@@ -48,4 +49,4 @@ keybinds {
 	}
 }
 
-theme "rose-pine"
+theme "match-term"
