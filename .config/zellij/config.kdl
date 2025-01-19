@@ -10,6 +10,7 @@ keybinds {
 		bind "3" { GoToTab 3; SwitchToMode "normal"; }
 		bind "4" { GoToTab 4; SwitchToMode "normal"; }
 		bind "5" { GoToTab 5; SwitchToMode "normal"; }
+		bind "F12" { WriteChars "[24~" ; SwitchToMode "normal"; }
 		unbind "Alt n"
 	}
 	normal clear-defaults=true {

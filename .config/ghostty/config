@@ -1,5 +1,9 @@
 theme = rose-pine-moon
 font-family = RobotoMono Nerd Font
 font-size = 16
+fullscreen
+window-decoration = false
 macos-titlebar-style = hidden
+macos-non-native-fullscreen = true
 keybind = f13=csi:24~
+keybind = ctrl+shift+f=toggle_fullscreen

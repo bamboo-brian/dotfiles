@@ -129,10 +129,15 @@ zinit light BurntSushi/ripgrep
 
 # asdf
 zinit ice from"gh" as"null" \
+	ver"v0.15.0" \
 	atclone"cp -R . $HOME/.asdf" \
-	atpull"%atclone" 
+	atpull"%atclone"
 zinit light asdf-vm/asdf
 
+# direnv
+zinit ice from"gh-r" as"program" \
+	mv"direnv* -> direnv"
+zinit light direnv/direnv
 
 # Some plugins for completions and shortcut aliases
 zinit wait lucid for \
