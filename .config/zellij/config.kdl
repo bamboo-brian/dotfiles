@@ -10,11 +10,18 @@ keybinds {
 		bind "3" { GoToTab 3; SwitchToMode "normal"; }
 		bind "4" { GoToTab 4; SwitchToMode "normal"; }
 		bind "5" { GoToTab 5; SwitchToMode "normal"; }
-		bind "F12" { WriteChars "[24~" ; SwitchToMode "normal"; }
+		bind "F12" { WriteChars "[24~"; TogglePaneFrames; SwitchToMode "locked"; }
+		bind "Alt F12" { SwitchToMode "normal"; }
 		unbind "Alt n"
+		unbind "z"
+	}
+	locked {
+		bind "Alt Esc" { WriteChars "[24;3~"; TogglePaneFrames; SwitchToMode "normal"; }
+		bind "Alt F12" { WriteChars "[24;3~"; TogglePaneFrames; SwitchToMode "normal"; }
 	}
 	normal clear-defaults=true {
 		bind "F12" { SwitchToMode "pane"; }
+		bind "Alt F12" { SwitchToMode "normal"; }
 		bind "Alt h" { MoveFocus "left"; }
 		bind "Alt j" { MoveFocus "down"; }
 		bind "Alt k" { MoveFocus "up"; }
