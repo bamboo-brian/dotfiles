@@ -62,7 +62,6 @@ alias eg=edit_grep
 alias em=edit_modified
 alias ediff='nvim +DiffviewOpen'
 alias z=zellij
-alias zp="zellij --layout project"
 
 PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/go/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 

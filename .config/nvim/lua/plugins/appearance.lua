@@ -1,14 +1,9 @@
 return {
 	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		priority = 500,
-		opts = {
-			highlight_groups = {
-				SpecialKey = {fg = "overlay"},
-				NonText = {fg = "overlay"}
-			}
-		}
+		"RRethy/base16-nvim",
+		config = function()
+			vim.cmd("colorscheme base16-catppuccin")
+		end
 	},
 	{
 		"nanozuki/tabby.nvim",
