@@ -58,9 +58,9 @@ nmap("<leader>ds", function() require("dap.ui.widgets").centered_float(require("
 nmap("-", "<cmd>NvimTreeFindFileToggle<CR>")
 
 -- Testing
-nmap("<leader>tt", require("neotest").run.run)
-nmap("<leader>ts", require("neotest").summary.toggle)
-nmap("<leader>to", require("neotest").output.open)
+nmap("<leader>tt", require("util").runTest)
+--nmap("<leader>ts", require("neotest").summary.toggle)
+--nmap("<leader>to", require("neotest").output.open)
 
 
 -- Yank

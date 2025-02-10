@@ -80,4 +80,10 @@ return {
 		end
 		vim.fn.setreg("*", methodInfo.className)
 	end,
+
+	runTest = function()
+		if vim.bo.filetype == 'php' then
+			os.execute('zellij run -d down -- phpunit-watch ' .. vim.fn.expand('%'))
+		end
+	end
 }
