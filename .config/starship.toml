@@ -7,21 +7,40 @@ $directory\
 $git_branch\
 $git_state \
 $git_status \
+$git_metrics \
+$fill\
 $cmd_duration\
+$golang\
+$php\
+$nodejs\
+$shell\
+$status\
 $line_break\
+${custom.zsh_prompt}\
 $character"""
+
+[fill]
+symbol = " "
 
 [directory]
 style = "blue"
 
+[shell]
+disabled = false
+format = "[$indicator]($style)"
+style = "bright-black"
+
 [character]
-success_symbol = "[❯](purple)"
+success_symbol = "[❯](green)"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
 
 [git_branch]
 format = "[$branch]($style)"
 style = "bright-black"
+
+[git_metrics]
+disabled = false
 
 [git_status]
 disabled = true
@@ -43,6 +62,14 @@ style = "bright-black"
 format = "[$duration]($style) "
 style = "yellow"
 
-[python]
-format = "[$virtualenv]($style) "
-style = "bright-black"
+[golang]
+format = "[$symbol($version )]($style)"
+
+[php]
+format = "[$symbol($version )]($style)"
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+
+[package]
+disabled = true

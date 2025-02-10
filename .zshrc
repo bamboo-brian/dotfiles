@@ -126,17 +126,15 @@ zinit ice from"gh-r" as"program" \
 	sbin"**/rg"
 zinit light BurntSushi/ripgrep
 
-# asdf
-zinit ice from"gh" as"null" \
-	ver"v0.15.0" \
-	atclone"cp -R . $HOME/.asdf" \
-	atpull"%atclone"
-zinit light asdf-vm/asdf
-
 # direnv
 zinit ice from"gh-r" as"program" \
 	mv"direnv* -> direnv"
 zinit light direnv/direnv
+
+# mise
+zinit ice from"gh-r" as"program" \
+	mv"mise* -> mise"
+zinit light jdx/mise
 
 # Some plugins for completions and shortcut aliases
 zinit wait lucid for \
@@ -159,7 +157,7 @@ zinit wait lucid for \
   OMZP::cp \
   OMZP::node \
   OMZP::yarn \
-  OMZP::asdf
+  OMZP::mise
 
 zinit wait lucid for \
   blockf atpull"zinit creinstall -q ." \
