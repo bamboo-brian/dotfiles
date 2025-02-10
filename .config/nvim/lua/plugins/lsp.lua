@@ -58,6 +58,15 @@ return {
 					cmd = {"OmniSharp"},
 				},
 				pyright = {},
+				nushell = {
+					root_dir = function(fname)
+						if fname == vim.fn.expand("~/.config/nushell/config.nu") then
+							return vim.fs.dirname(fname)
+						end
+						return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+					end,
+					single_file_support = false
+				},
 			}
 
 
