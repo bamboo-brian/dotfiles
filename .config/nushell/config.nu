@@ -10,7 +10,7 @@ $env.config.cursor_shape.vi_normal = "block"
 
 $env.config.buffer_editor = "nvim"
 
-$env.config.completions.algorithm = "fuzzy"
+#$env.config.completions.algorithm = "fuzzy"
 $env.config.completions.sort = "smart"
 
 $env.config.table.index_mode = "auto"

@@ -54,9 +54,7 @@ return {
 				},
 				gopls = {},
 				ts_ls = {},
-				omnisharp = {
-					cmd = {"OmniSharp"},
-				},
+				csharp_ls = {},
 				pyright = {},
 				nushell = {
 					root_dir = function(fname)

@@ -16,7 +16,6 @@ $nodejs\
 $shell\
 $status\
 $line_break\
-${custom.zsh_prompt}\
 $character"""
 
 [fill]
