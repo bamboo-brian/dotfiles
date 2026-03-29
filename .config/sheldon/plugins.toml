@@ -1,0 +1,57 @@
+shell = "zsh"
+
+[plugins]
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+apply = ["fpath"]
+
+[plugins.compinit]
+inline = "fpath=($^fpath(N)) && autoload -Uz compinit && compinit"
+
+[plugins.omz-libs]
+github = "ohmyzsh/ohmyzsh"
+use = [
+    "lib/functions.zsh",
+    "lib/clipboard.zsh",
+    "lib/compfix.zsh",
+    "lib/completion.zsh",
+    "lib/directories.zsh",
+    "lib/git.zsh",
+    "lib/history.zsh",
+    "lib/prompt_info_functions.zsh",
+    "lib/spectrum.zsh",
+    "lib/termsupport.zsh",
+    "lib/theme-and-appearance.zsh",
+]
+
+[plugins.omz-vi-mode]
+github = "ohmyzsh/ohmyzsh"
+use = ["plugins/vi-mode/*.zsh"]
+hooks.pre = """
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+VI_MODE_SET_CURSOR=true
+"""
+
+[plugins.omz-git]
+github = "ohmyzsh/ohmyzsh"
+use = ["plugins/git/*.zsh"]
+
+[plugins.omz-cp]
+github = "ohmyzsh/ohmyzsh"
+use = ["plugins/cp/*.zsh"]
+
+[plugins.omz-node]
+github = "ohmyzsh/ohmyzsh"
+use = ["plugins/node/*.zsh"]
+
+[plugins.omz-yarn]
+github = "ohmyzsh/ohmyzsh"
+use = ["plugins/yarn/*.zsh"]
+
+[plugins.omz-mise]
+github = "ohmyzsh/ohmyzsh"
+use = ["plugins/mise/*.zsh"]
+
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
