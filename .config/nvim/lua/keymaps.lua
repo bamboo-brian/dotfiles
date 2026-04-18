@@ -3,7 +3,10 @@ local nmap = function(key, cmd) vim.keymap.set("n", key, cmd, { noremap = true }
 local imap = function(key, cmd, opts) vim.keymap.set("i", key, cmd, vim.tbl_extend("keep", opts or {}, { noremap = true })) end
 
 nmap("<leader>R", "<cmd>source ~/.config/nvim/init.lua<CR>")
-nmap("<leader>u", "<cmd>UndotreeToggle<CR>")
+nmap("<leader>u", function()
+	vim.cmd.packadd("nvim.undotree")
+	vim.cmd.Undotree()
+end)
 
 nmap("<leader>n", '<cmd>cnext<cr>')
 nmap("<leader>p", '<cmd>cprev<cr>')
@@ -103,19 +106,30 @@ return {
 	lsp_attach_keymaps = function(bufnr)
 		local bnmap = function(key, cmd) vim.keymap.set("n", key, cmd, { noremap = true, buffer = bufnr }) end
 		local bimap = function(key, cmd) vim.keymap.set("i", key, cmd, { noremap = true, buffer = bufnr }) end
+		local jump_opts = {
+			on_jump = function(diagnostic, winid)
+				if diagnostic then
+					vim.diagnostic.open_float({ scope = "cursor", focusable = false, border = "rounded" }, winid)
+				end
+			end,
+		}
 
 		bnmap("<leader>F", function() vim.lsp.buf.format({ timeout_ms = 3000}) end)
 		bnmap("<leader>.", vim.lsp.buf.code_action)
 		bnmap("<leader>r", vim.lsp.buf.rename)
-		bnmap("]d", vim.diagnostic.goto_next)
-		bnmap("[d", vim.diagnostic.goto_prev)
+		bnmap("]d", function() vim.diagnostic.jump(vim.tbl_extend("force", jump_opts, { count = 1 })) end)
+		bnmap("[d", function() vim.diagnostic.jump(vim.tbl_extend("force", jump_opts, { count = -1 })) end)
 		bnmap("<leader>wd", '<cmd>Telescope diagnostics<CR>')
 		bnmap("<leader>S", function() require"null-ls".toggle{name = "cspell"} end)
 		bnmap("gd", "<cmd>Telescope lsp_definitions show_line=false initial_mode=normal<CR>")
 		bnmap("gD", "<cmd>Telescope lsp_type_definitions show_line=false initial_mode=normal<CR>")
 		bnmap("gr", "<cmd>Telescope lsp_references show_line=false initial_mode=normal<CR>")
-		bnmap("K", vim.lsp.buf.hover)
-		bimap("<c-k>", vim.lsp.buf.signature_help)
+		bnmap("K", function()
+			vim.lsp.buf.hover({ focusable = false, border = "rounded" })
+		end)
+		bimap("<c-k>", function()
+			vim.lsp.buf.signature_help({ focusable = false, border = "rounded" })
+		end)
 	end,
 
 	gitsigns_attach_keymaps = function(bufnr)

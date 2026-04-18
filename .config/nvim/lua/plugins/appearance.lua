@@ -1,15 +1,11 @@
 return {
 	{
-	  'f4z3r/gruvbox-material.nvim',
-	  name = 'gruvbox-material',
-	  lazy = false,
-	  priority = 1000,
-	  opts = { contrast = "hard" },
-	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"Mofiqul/dracula.nvim",
+		lazy = false,
 		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("dracula")
+		end,
 	},
 	{
 		"nanozuki/tabby.nvim",

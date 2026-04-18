@@ -1,12 +1,3 @@
-local lsp = vim.lsp
-
---lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, { underline = true })
-
-lsp.handlers["textDocument/signatureHelp"] =
-	lsp.with(lsp.handlers.signature_help, { focusable = false, border = "rounded" })
-
-lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { focusable = false, border = "rounded" })
-
 vim.diagnostic.config({
 	signs = {
 		text = {
@@ -22,7 +13,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local on_attach = function(client, bufnr)
+			local on_attach = function(_, bufnr)
 				require("keymaps").lsp_attach_keymaps(bufnr)
 			end
 

@@ -1,0 +1,18 @@
+// Dracula Theme:
+// https://draculatheme.com
+
+themes {
+  dracula {
+    bg "#282a36"
+    fg "#f8f8f2"
+    red "#ff5555"
+    green "#50fa7b"
+    blue "#6272a4"
+    yellow "#f1fa8c"
+    magenta "#ff79c6"
+    orange "#ffb86c"
+    cyan "#8be9fd"
+    black "#21222c"
+    white "#f8f8f2"
+  }
+}

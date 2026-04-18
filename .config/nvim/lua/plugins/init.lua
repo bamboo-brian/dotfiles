@@ -1,7 +1,5 @@
 local M = {
 	"tpope/vim-repeat",
-	"mbbill/undotree",
-	"gpanders/editorconfig.nvim",
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },

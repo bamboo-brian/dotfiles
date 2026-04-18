@@ -8,7 +8,7 @@ Personal dotfiles managed with GNU Stow. Run `./install.sh` on a new machine to 
 
 To apply changes after adding new config files:
 ```sh
-stow --target="$HOME" .
+stow --target="$HOME" --ignore='^\.zshrc$' .
 ```
 
 ## Installation
@@ -16,19 +16,21 @@ stow --target="$HOME" .
 `install.sh` does three things in order:
 1. Installs Homebrew if not present (Linux only: also requires `eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"` in `.zshrc`)
 2. Runs `brew bundle` to install all packages from `Brewfile`
-3. Runs `stow --target="$HOME" .` to symlink dotfiles
+3. Runs `stow --target="$HOME" --ignore='^\.zshrc$' .` to symlink dotfiles, then copies the tracked `.zshrc` wrapper into place as a local `~/.zshrc`
 
 ## Structure
 
-All config files live under `.config/` (mirrors `~/.config/`) and `.zshrc` (mirrors `~/.zshrc`). Stow creates symlinks from `$HOME` to this repo.
+All config files live under `.config/` (mirrors `~/.config/`), `.zshrc.shared` (mirrors `~/.zshrc.shared`), and a tracked `.zshrc` wrapper template. Stow creates symlinks from `$HOME` to this repo. The real `~/.zshrc` is copied from the tracked wrapper by `install.sh` so app-managed edits do not touch tracked files.
 
-### Shell (`.zshrc`)
+### Shell (`.zshrc`, `.zshrc.shared`)
+- `.zshrc` is the tracked wrapper template copied to `~/.zshrc`
 - Zsh with vi keybindings (`bindkey -v`)
 - Plugins managed by **sheldon** (`eval "$(sheldon source)"`)
 - Prompt via **starship** (`eval "$(starship init zsh)"`)
 - Runtime versions via **mise** (handled by the OMZ mise plugin loaded through sheldon)
 - Directory env vars via **direnv**
 - Custom editor functions: `edit_find` (`ef`), `edit_grep` (`eg`), `edit_modified` (`em`)
+- Optional machine-local overrides in `~/.zshrc.local`
 
 ### Sheldon (`.config/sheldon/plugins.toml`)
 Loads zsh plugins in this order — order matters:

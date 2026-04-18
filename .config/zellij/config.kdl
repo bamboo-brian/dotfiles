@@ -37,6 +37,7 @@ keybinds clear-defaults=true {
         bind "Ctrl p" { SwitchToMode "normal"; }
         bind "s" { NewPane "down"; SwitchToMode "normal"; }
         bind "v" { NewPane "right"; SwitchToMode "normal"; }
+        bind "n" { NewPane "stacked"; SwitchToMode "normal"; }
         bind "tab" { ToggleFloatingPanes; SwitchToMode "normal"; }
     }
     tab {
@@ -296,7 +297,7 @@ load_plugins {
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "match-term"
+theme "dracula"
  
 // Choose the base input mode of zellij.
 // Default: normal

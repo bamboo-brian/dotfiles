@@ -5,7 +5,7 @@ layout {
             plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
                 format_left   "{mode} {command_user_info} #[fg=4]{session}"
                 format_center "{tabs}"
-                format_right  "{command_git_branch} {datetime}"
+                format_right  "{command_battery} {datetime}"
                 format_space  ""
 
                 border_enabled  "false"
@@ -26,10 +26,10 @@ layout {
                 command_user_info_interval    "0"
                 command_user_info_rendermode  "static"
 
-                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-                command_git_branch_format      "#[fg=4] {stdout} "
-                command_git_branch_interval    "10"
-                command_git_branch_rendermode  "static"
+                command_battery_command     "sh -c 'line=$(pmset -g batt | tail -1 | cut -f2 | cut -d\";\" -f1,2 | tr \";\" \" \" | tr -s \" \"); pct=$(printf \"%s\" \"$line\" | cut -d\" \" -f1 | tr -d \"%\"); state=$(printf \"%s\" \"$line\" | cut -d\" \" -f2-); case \"$state\" in charging) suffix=\" \" ;; \"AC attached\") suffix=\"  AC\" ;; *) suffix=\"\" ;; esac; if [ \"$pct\" -le 10 ]; then color=1; elif [ \"$pct\" -le 25 ]; then color=3; else color=8; fi; printf \"#[fg=%s] %s%%%s \" \"$color\" \"$pct\" \"$suffix\"'"
+                command_battery_format      "{stdout}"
+                command_battery_interval    "30"
+                command_battery_rendermode  "dynamic"
 
                 datetime        "#[fg=8,bold] {format} "
                 datetime_format "%H:%M"
