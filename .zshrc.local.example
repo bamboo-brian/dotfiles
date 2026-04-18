@@ -1,5 +1,0 @@
-# Machine-specific zsh config lives here.
-# Copy to ~/.zshrc.local if you want an untracked local include.
-
-# Example:
-# export PATH="$HOME/.rd/bin:$PATH"

@@ -15,7 +15,7 @@ fi
 
 brew bundle
 
-stow --target="$HOME" --ignore='^\.zshrc$' .
+stow --target="$HOME" home
 
 if [ -L "$wrapper_target" ]; then
   rm "$wrapper_target"
