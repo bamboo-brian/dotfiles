@@ -1,18 +1,41 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+		branch = "main",
+		lazy = false,
+		build = ":TSUpdate",
+		dependencies = {
+			{
+				"nvim-treesitter/nvim-treesitter-textobjects",
+				branch = "main",
+				init = function()
+					vim.g.no_plugin_maps = true
+				end,
+				config = function()
+					require("nvim-treesitter-textobjects").setup({
+						select = {
+							lookahead = true,
+						},
+						swap = {},
+						move = {
+							set_jumps = true,
+						},
+						lsp_interop = {
+							border = "single",
+						},
+					})
+				end,
+			},
+		},
 		config = function()
 			require("nvim-treesitter").setup({
-				ensure_installed = "all",
-				ignore_install = {"norg"},
 				highlight = {
 					enable = true,
 				},
-				incremental_selection = {
+				indent = {
 					enable = true,
 				},
-				indent = {
+				incremental_selection = {
 					enable = true,
 				},
 				textobjects = {

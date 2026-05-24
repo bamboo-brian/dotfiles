@@ -61,13 +61,10 @@ return {
 	},
 	{
 		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
 		dependencies = {"nvim-telescope/telescope.nvim"},
 		config = function()
-			require('harpoon').setup({
-				menu = {
-					width = 120 
-				}
-			})
+			require('harpoon').setup()
 			require("telescope").load_extension('harpoon')
 		end
 	}

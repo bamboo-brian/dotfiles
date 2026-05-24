@@ -23,10 +23,9 @@ end
 
 return {
 	debug_hover = function()
-		local ts_utils = require("nvim-treesitter.ts_utils")
 		local widgets = require("dap.ui.widgets")
 
-		local node = ts_utils.get_node_at_cursor()
+		local node = ts.get_node()
 
 		if not node then
 			return
@@ -41,9 +40,20 @@ return {
 		widgets.hover(expr)
 	end,
 
-	fold_php_uses = function()
-		local tree = ts.get_parser():parse()
-		local root = tree[1]:root()
+	fold_php_uses = function(args)
+		local bufnr = type(args) == "table" and args.buf or 0
+		local ok, parser = pcall(ts.get_parser, bufnr, "php")
+		if not ok or not parser then
+			return
+		end
+
+		local trees = parser:parse()
+		local tree = trees and trees[1]
+		if not tree then
+			return
+		end
+
+		local root = tree:root()
 		local query = ts.query.parse('php', '(namespace_use_declaration) @use')
 		local captures = query:iter_captures(root, 0)
 		_, firstNode, _ = captures()

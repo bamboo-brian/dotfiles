@@ -2,7 +2,7 @@ return {
 	"wellle/targets.vim",
 	"tpope/vim-surround",
 	{
-		"phaazon/hop.nvim",
+		"smoka7/hop.nvim",
 		config = true,
 	},
 }
