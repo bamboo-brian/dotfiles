@@ -1,0 +1,14 @@
+[pacman]
+neovim
+fzf
+bat
+ripgrep
+starship
+zellij
+direnv
+stow
+
+[aur]
+sheldon
+mise
+cspell

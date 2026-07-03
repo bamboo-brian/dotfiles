@@ -20,10 +20,6 @@ local M = {
 			lookup_parents = true,
 		},
 	},
-	{
-      "nvim-herdr",
-      dir = "/Users/bhill/repos/nvim-herdr",
-	},
 }
 
 local modules = {
