@@ -93,7 +93,13 @@ return {
 
 	runTest = function()
 		if vim.bo.filetype == 'php' then
-			os.execute('zellij run -d down -- phpunit-watch ' .. vim.fn.expand('%'))
+			local herdr = require('herdr')
+			local result, err = herdr.pane.split(vim.env.HERDR_PANE_ID, { direction = 'down', no_focus = true })
+			if err or not result then
+				vim.notify('herdr split failed: ' .. (err or 'unknown'), vim.log.levels.ERROR)
+				return
+			end
+			herdr.pane.run(result.result.pane.pane_id, 'phpunit-watch ' .. vim.fn.expand('%'))
 		end
 	end
 }

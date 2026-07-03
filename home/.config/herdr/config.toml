@@ -1,0 +1,66 @@
+# herdr config — keybindings adapted from ~/.config/zellij/config.kdl.
+# herdr is non-modal: zellij's "Ctrl+P then h" collapses to "prefix+h" or
+# a direct Alt chord. Each action accepts a single binding.
+
+onboarding = false
+
+[theme]
+name = "terminal"
+
+[keys]
+# Matches zellij's lock-mode toggle key.
+prefix = "f12"
+
+# Direct shortcuts — mirrors zellij Alt+... in normal mode.
+focus_pane_left  = "alt+h"
+focus_pane_down  = "alt+j"
+focus_pane_up    = "alt+k"
+focus_pane_right = "alt+l"
+switch_tab       = "alt+1..9"
+
+# Tabs (zellij Ctrl+t mode / tmux mode)
+new_tab          = "prefix+a"
+rename_tab       = "prefix+,"
+close_tab        = "prefix+shift+x"
+previous_tab     = ["alt+p", "prefix+p"]
+next_tab         = ["alt+n", "prefix+n"]
+
+# Panes (zellij Ctrl+p mode)
+split_horizontal = "prefix+s"
+split_vertical   = "prefix+v"
+close_pane       = "prefix+x"
+zoom             = "prefix+f"
+rename_pane      = "prefix+shift+,"
+edit_scrollback  = "prefix+e"
+resize_mode      = "prefix+r"
+
+# Pane cycling (no direct zellij analogue; tmux-style)
+cycle_pane_next     = "prefix+tab"
+cycle_pane_previous = "prefix+shift+tab"
+
+# Workspaces (no zellij equivalent — closest to sessions)
+workspace_picker   = "prefix+w"
+new_workspace      = "prefix+shift+a"
+rename_workspace   = "prefix+shift+w"
+close_workspace    = "prefix+shift+d"
+previous_workspace = ["alt+shift+p", "prefix+shift+p"]
+next_workspace     = ["alt+shift+n", "prefix+shift+n"]
+switch_workspace   = "alt+shift+1..9"
+new_worktree       = "prefix+alt+a"
+remove_worktree    = "prefix+alt+d"
+
+# Misc
+toggle_sidebar = "prefix+b"
+detach         = "prefix+q"
+reload_config  = "prefix+shift+r"
+help           = "prefix+?"
+settings       = "prefix+:"
+
+[ui]
+# Mirror zellij's mouse_mode default (enabled) but keep terminal Cmd-clicks
+# working — herdr's mouse capture is on by default; flip if you prefer
+# raw terminal mouse behavior.
+# mouse_capture = false
+agent_panel_scope = "all"
+[ui.toast]
+delivery = "herdr"
