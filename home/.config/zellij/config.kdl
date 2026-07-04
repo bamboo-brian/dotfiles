@@ -66,7 +66,19 @@ keybinds clear-defaults=true {
 
         bind "[" { BreakPaneLeft; SwitchToMode "normal"; }
         bind "]" { BreakPaneRight; SwitchToMode "normal"; }
-        bind "b" { BreakPane; SwitchToMode "normal"; }
+
+        bind "," {
+          LaunchOrFocusPlugin "https://github.com/bamboo-brian/claude-monitor/releases/download/v0.1.0/claude-monitor-plugin.wasm" {
+			  skip_plugin_cache true
+			  move_to_focused_tab true
+          }; SwitchToMode "normal";
+        }
+        bind "-" {
+          LaunchOrFocusPlugin "session-manager" {
+			  move_to_focused_tab true
+			  floating true
+          }; SwitchToMode "normal";
+        }
     }
     tab {
         bind "left" { GoToPreviousTab; }
@@ -89,9 +101,6 @@ keybinds clear-defaults=true {
         bind "down" { Resize "Increase down"; }
         bind "up" { Resize "Increase up"; }
         bind "right" { Resize "Increase right"; }
-        bind "+" { Resize "Increase"; }
-        bind "-" { Resize "Decrease"; }
-        bind "=" { Resize "Increase"; }
         bind "H" { Resize "Decrease left"; }
         bind "J" { Resize "Decrease down"; }
         bind "K" { Resize "Decrease up"; }
@@ -100,7 +109,6 @@ keybinds clear-defaults=true {
         bind "j" { Resize "Increase down"; }
         bind "k" { Resize "Increase up"; }
         bind "l" { Resize "Increase right"; }
-        bind "Ctrl n" { SwitchToMode "normal"; }
     }
     move {
         bind "left" { MovePane "left"; }
@@ -127,12 +135,6 @@ keybinds clear-defaults=true {
         bind "p" { Search "up"; }
     }
     session {
-        bind "," {
-          LaunchOrFocusPlugin "session-manager" {
-                floating true
-                move_to_focused_tab true
-          }
-        }
         bind "a" {
             LaunchOrFocusPlugin "zellij:about" {
                 floating true
@@ -227,7 +229,7 @@ load_plugins {
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "dracula"
+theme "match-term"
  
 // Choose the base input mode of zellij.
 // Default: normal
