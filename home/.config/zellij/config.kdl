@@ -26,9 +26,9 @@ keybinds clear-defaults=true {
 
     }
     locked {
-        bind "Alt F12" { WriteChars "[24;3~"; TogglePaneFrames; SwitchToMode "normal"; }
-        bind "Alt esc" { WriteChars "[24;3~"; TogglePaneFrames; SwitchToMode "normal"; }
-        bind "Alt x" { WriteChars "[24;3~"; TogglePaneFrames; SwitchToMode "normal"; }
+        bind "Alt F12" { WriteChars "[24;3~"; SwitchToMode "normal"; }
+        bind "Alt esc" { WriteChars "[24;3~"; SwitchToMode "normal"; }
+        bind "Alt x" { WriteChars "[24;3~"; SwitchToMode "normal"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -52,7 +52,7 @@ keybinds clear-defaults=true {
 
         bind ";" { ToggleFloatingPanes; SwitchToMode "normal"; }
 
-        bind "F12" { WriteChars "[24~"; TogglePaneFrames; SwitchToMode "locked"; }
+        bind "F12" { SwitchToMode "locked"; }
 
         bind "1" { GoToTab 1; SwitchToMode "normal"; }
         bind "2" { GoToTab 2; SwitchToMode "normal"; }
