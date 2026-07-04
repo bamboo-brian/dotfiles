@@ -68,7 +68,7 @@ keybinds clear-defaults=true {
         bind "]" { BreakPaneRight; SwitchToMode "normal"; }
 
         bind "," {
-          LaunchOrFocusPlugin "https://github.com/bamboo-brian/claude-monitor/releases/download/v0.1.0/claude-monitor-plugin.wasm" {
+          LaunchOrFocusPlugin "https://github.com/bamboo-brian/claude-monitor/releases/download/v0.1.1/claude-monitor-plugin.wasm" {
 			  skip_plugin_cache true
 			  move_to_focused_tab true
           }; SwitchToMode "normal";
