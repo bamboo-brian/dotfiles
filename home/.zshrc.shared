@@ -62,6 +62,7 @@ alias eg=edit_grep
 alias em=edit_modified
 alias ediff='nvim +DiffviewOpen'
 alias z=zellij
+alias za='zellij attach $(zellij ls -s | fzf)'
 
 PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/go/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
