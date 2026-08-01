@@ -1,5 +1,5 @@
 theme = Dracula
 font-family = JetBrainsMono Nerd Font
-font-size = 16
+font-size = 21
 keybind = f13=csi:24~
 keybind = ctrl+shift+f=toggle_fullscreen

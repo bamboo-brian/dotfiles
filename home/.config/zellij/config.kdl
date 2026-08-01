@@ -24,6 +24,11 @@ keybinds clear-defaults=true {
         bind "Alt 8" { GoToTab 8; }
         bind "Alt 9" { GoToTab 9; }
 
+        bind "Alt K" { FocusGuestSession; }
+        bind "Alt J" { FocusHostSession; }
+        bind "Alt H" { GoToPreviousTab; }
+        bind "Alt L" { GoToNextTab; }
+        bind "Alt z" { ToggleHostFullscreen; }
     }
     locked {
         bind "Alt F12" { WriteChars "[24;3~"; SwitchToMode "normal"; }
@@ -48,7 +53,13 @@ keybinds clear-defaults=true {
         bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        bind "F" { ToggleFocusNoUiFullscreen; SwitchToMode "normal"; }
+        bind "F" { ToggleFocusNoUiFullscreen; SwitchToMode "normal"; }
         bind "'" { TogglePanePinned; SwitchToMode "normal"; }
+
+        bind "i" { FocusGuestSession; SwitchToMode "normal"; }
+        bind "o" { FocusHostSession; SwitchToMode "normal"; }
+        bind "z" { ToggleHostFullscreen; SwitchToMode "normal"; }
 
         bind ";" { ToggleFloatingPanes; SwitchToMode "normal"; }
 
@@ -71,11 +82,7 @@ keybinds clear-defaults=true {
           LaunchOrFocusPlugin "https://github.com/bamboo-brian/claude-monitor/releases/download/v0.1.1/claude-monitor-plugin.wasm" {
 			  skip_plugin_cache true
 			  move_to_focused_tab true
-          }; SwitchToMode "normal";
-        }
-        bind "-" {
-          LaunchOrFocusPlugin "session-manager" {
-			  move_to_focused_tab true
+              floating true
           }; SwitchToMode "normal";
         }
     }
@@ -169,7 +176,6 @@ keybinds clear-defaults=true {
         bind "m" { SwitchToMode "move"; }
         bind "r" { SwitchToMode "resize"; }
         bind "t" { SwitchToMode "tab"; }
-        bind "o" { SwitchToMode "session"; }
         bind "Ctrl s" { SwitchToMode "scroll"; }
         bind "/" { SwitchToMode "search"; }
         bind "esc" { SwitchToMode "normal"; }
@@ -206,45 +212,56 @@ plugins {
     }
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
-    status-bar location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-        format_left   "{mode} {command_user_info} #[fg=4]{session}"
-        format_center "{tabs}"
-        format_right  "{command_battery} {datetime}"
+    status-bar location="https://github.com/bamboo-brian/zjstatus/releases/latest/download/zjstatus.wasm" {
+        format_left   "{mode}{ancestry} #[fg=6]{session} {tabs}"
+        format_right  "{command_user_info} {command_battery} {datetime}"
         format_space  ""
-
-        border_enabled  "false"
-        border_char     "─"
-        border_format   "#[fg=#6C7086]{char}"
-        border_position "top"
+        format_hide_on_overlength "true"
+        format_precedence "lcr"
 
         mode_normal  "#[bg=4] {name} #[fg=4]"
         mode_pane  "#[bg=1] {name} #[fg=1]"
         mode_locked    "#[fg=0]█"
         mode_default_to_mode "pane"
+        mode_nested_ascended "#[bg=8,fg=0] {name} #[fg=8]"
+        mode_nested_dimmed   "#[bg=8,fg=0] {name} #[fg=8]"
+        mode_nested_active   "{mode}"
 
-        tab_normal   "#[fg=8]#[bg=8] {name} #[fg=8]"
-        tab_active   "#[fg=4]#[bg=4,bold,italic] {name} #[fg=4]"
+        ancestry_format "#[fg=8] {name} "
+        ancestry_nested_show false
+
+        tab_normal   "#[fg=8]#[bg=8] {name} #[fg=8]"
+        tab_active   "#[fg=4]#[bg=4,bold,italic] {name} #[fg=4]"
+        tab_nested_ascended "#[fg=8]#[bg=8,fg=0] {name} #[fg=8]"
+        tab_nested_dimmed   "#[fg=8]#[bg=8,fg=0] {name} #[fg=8]"
+        tab_nested_active   "{tab}"
 
         command_user_info_command     "bash -c \"echo $(whoami)@$(hostname)\""
         command_user_info_format      "#[fg=4,bold] {stdout} "
         command_user_info_interval    "0"
         command_user_info_rendermode  "static"
+        command_user_info_nestedshow false
 
         command_battery_command     "sh -c 'line=$(pmset -g batt | tail -1 | cut -f2 | cut -d\";\" -f1,2 | tr \";\" \" \" | tr -s \" \"); pct=$(printf \"%s\" \"$line\" | cut -d\" \" -f1 | tr -d \"%\"); state=$(printf \"%s\" \"$line\" | cut -d\" \" -f2-); case \"$state\" in charging) suffix=\" \" ;; \"AC attached\") suffix=\"  AC\" ;; *) suffix=\"\" ;; esac; if [ \"$pct\" -le 10 ]; then color=1; elif [ \"$pct\" -le 25 ]; then color=3; else color=8; fi; printf \"#[fg=%s] %s%%%s \" \"$color\" \"$pct\" \"$suffix\"'"
         command_battery_format      "{stdout}"
         command_battery_interval    "30"
         command_battery_rendermode  "dynamic"
+        command_battery_nestedshow false
 
         datetime        "#[fg=8,bold] {format} "
         datetime_format "%H:%M"
         datetime_timezone "America/Phoenix"
-            }
+        datetime_nested_show false
+
+    }
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
 }
+
+nested_session_handling "descend"
 
 // Plugins to load in the background when a new session starts
 // eg. "file:/path/to/my-plugin.wasm"
@@ -307,7 +324,7 @@ theme "match-term"
 //   - true (default, enabled)
 //   - false
 // 
-pane_frames false
+pane_frames true
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
