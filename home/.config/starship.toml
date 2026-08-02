@@ -1,28 +1,35 @@
 command_timeout = 1000
 
-format = """
-$username\
+format = """\
 $hostname\
+$username\
 $directory\
 $git_branch\
 $git_state \
 $git_status \
 $git_metrics \
 $fill\
-$cmd_duration\
-$golang\
-$php\
-$nodejs\
-$shell\
-$status\
 $line_break\
-$character"""
+$status\
+$character\
+"""
+
+[status]
+disabled = false
+
+[hostname]
+format = "[](bright-black)[$hostname]($style)[:](bg:bright-black)"
+style = "bg:bright-black fg:bright-green"
+
+[username]
+format = "[$user]($style)[](bright-black) "
+style_user = "bg:bright-black fg:cyan"
 
 [fill]
 symbol = " "
 
 [directory]
-style = "blue"
+style = "bright-blue"
 
 [shell]
 disabled = false
