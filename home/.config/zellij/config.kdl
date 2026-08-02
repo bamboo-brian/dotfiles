@@ -280,7 +280,45 @@ nested_session_handling "descend"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
 }
+
+web_server true
  
+web_client {
+  font "JetBrainsMono Nerd Font" // default is "monospace" - deferring this decision to the browser/os
+  cursor_style "block" // possibilities: "block", "bar", "underline"
+  cursor_inactive_style "outline" // possibilities: "outline", "block", "bar", "underline"
+  mac_option_is_meta false // default is true
+  theme {
+    // NOTE: this is the theme of the terminal web client which is separate from Zellij's theme
+    //
+    // all values are optional and should be in the form of "r g b" (eg. 10 20 30)
+    // Catppuccin Mocha
+    background 30 30 46
+    foreground 205 214 244
+    black 69 71 90
+    blue 137 180 250
+    bright_black 88 91 112
+    bright_blue 137 180 250
+    bright_cyan 148 226 213
+    bright_green 166 227 161
+    bright_magenta 245 194 231
+    bright_red 243 139 168
+    bright_white 166 173 200
+    bright_yellow 249 226 175
+    cursor 245 224 220
+    cursor_accent 30 30 46
+    cyan 148 226 213
+    green 166 227 161
+    magenta 245 194 231
+    red 243 139 168
+    white 186 194 222
+    yellow 249 226 175
+    selection_background 88 91 112
+    selection_foreground 205 214 244
+    selection_inactive_background 69 71 90
+  }
+}
+
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
 //   - true
