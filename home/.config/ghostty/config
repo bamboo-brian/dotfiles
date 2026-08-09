@@ -1,4 +1,4 @@
-theme = Dracula
+theme = Telekinesis
 font-family = JetBrainsMono Nerd Font
 font-size = 21
 keybind = f13=csi:24~

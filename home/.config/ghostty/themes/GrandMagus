@@ -1,0 +1,23 @@
+background = 170F26
+foreground = EDE6F5
+cursor-color = 3DFF6E
+cursor-text = 170F26
+selection-background = 3B2455
+selection-foreground = EDE6F5
+
+palette = 0=#1F1530
+palette = 1=#E8546B
+palette = 2=#3DFF6E
+palette = 3=#E0A83E
+palette = 4=#8C7CFF
+palette = 5=#B06FD1
+palette = 6=#5FC9B8
+palette = 7=#C9BEDC
+palette = 8=#4A3A66
+palette = 9=#FF7A90
+palette = 10=#6FFFA0
+palette = 11=#F0C468
+palette = 12=#ACA0FF
+palette = 13=#D19AE8
+palette = 14=#8FE8D4
+palette = 15=#F7F3FF
