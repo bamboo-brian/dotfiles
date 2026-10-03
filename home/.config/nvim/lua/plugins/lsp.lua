@@ -41,7 +41,7 @@ return {
 					cmd = {"elixir-ls"},
 				},
 				gopls = {},
-				ts_ls = {},
+				tsc = {},
 				csharp_ls = {},
 				pyright = {},
 				nushell = {

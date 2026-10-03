@@ -212,7 +212,7 @@ plugins {
     }
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
-    status-bar location="https://github.com/bamboo-brian/zjstatus/releases/latest/download/zjstatus.wasm" {
+    status-bar location="https://github.com/bamboo-brian/zjstatus/releases/download/v0.25.0%2Bbhill.1/zjstatus.wasm" {
         format_left   "{mode}{ancestry} #[fg=6]{session} {tabs}"
         format_right  "{command_user_info} {command_battery} {datetime}"
         format_space  ""
