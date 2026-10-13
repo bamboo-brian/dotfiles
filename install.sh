@@ -62,3 +62,6 @@ else
 fi
 
 chmod 0644 "$wrapper_target"
+
+bash "$repo_root/scripts/install-hyprland.sh"
+bash "$repo_root/scripts/install-aerospace.sh"

@@ -1,1 +1,3 @@
 .zshrc.local
+hyprland/.config/hypr/local-options.lua
+hyprland/.config/hypr/local-settings.lua

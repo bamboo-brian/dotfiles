@@ -1,0 +1,2 @@
+(^|/)local-(options|settings)\.lua$
+\.stow-local-ignore$

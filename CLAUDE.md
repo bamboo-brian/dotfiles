@@ -13,10 +13,10 @@ stow --target="$HOME" home
 
 ## Installation
 
-`install.sh` does three things in order:
-1. Installs Homebrew if not present (Linux only: also requires `eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"` in `.zshrc`)
-2. Runs `brew bundle` to install all packages from `Brewfile`
-3. Runs `stow --target="$HOME" home` to symlink home-managed dotfiles, then copies the tracked `.zshrc` wrapper into place as a local `~/.zshrc`
+`install.sh` installs packages from `Pacmanfile` on pacman systems, otherwise
+installs Homebrew if needed and runs `brew bundle`. It then stows `home`, copies
+the tracked `.zshrc` wrapper into place, and invokes the gated Hyprland and
+AeroSpace installers.
 
 ## Structure
 
@@ -25,6 +25,23 @@ Home-managed files live under `home/`, which mirrors `$HOME` for Stow:
 - `home/.zshrc.shared` mirrors `~/.zshrc.shared`
 
 Repo-only files such as `CLAUDE.md`, `install.sh`, `Brewfile`, and `.zshrc` stay at the repository root. The real `~/.zshrc` is copied from the tracked wrapper by `install.sh` so app-managed edits do not touch tracked files.
+
+### Hyprland (`hyprland/.config/hypr/`)
+- A separate Stow package, applied only on Linux with `Hyprland` on `PATH`
+- Apply through `bash scripts/install-hyprland.sh`; it honors `XDG_CONFIG_HOME`
+- Shared Lua modules provide bindings and general preferences
+- Optional untracked `local-options.lua` configures commands and monitor names;
+  `local-settings.lua` applies hardware/session settings and final overrides
+- Never put machine-local hooks in the Stow package or move this package into `home`
+- See `README.md` for migration, backups, and verification
+- Run `python3 scripts/test-hyprland.py` for isolated installer/config checks
+
+### AeroSpace (`aerospace/.aerospace.toml`)
+- Separate macOS-only Stow package, applied when `aerospace` is on `PATH`
+- Apply through `bash scripts/install-aerospace.sh`
+- Command+H/J/K/L navigates windows; Command+Option navigates workspaces
+- Installer backs up conflicting home and XDG configs to avoid ambiguous loading
+- Run `python3 scripts/test-aerospace.py` for installer and TOML checks
 
 ### Shell (`.zshrc`, `home/.zshrc.shared`)
 - `.zshrc` is the tracked wrapper template copied to `~/.zshrc`

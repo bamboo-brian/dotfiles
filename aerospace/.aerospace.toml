@@ -1,0 +1,47 @@
+# Command is the macOS equivalent of the Hyprland Super modifier.
+# https://nikitabobko.github.io/AeroSpace/guide
+config-version = 2
+start-at-login = true
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+persistent-workspaces = ['1', '2', '3']
+
+# Bind physical key positions, including the number row on AZERTY keyboards.
+key-mapping.preset = 'qwerty'
+
+[gaps]
+inner.horizontal = 6
+inner.vertical = 6
+outer.left = 8
+outer.right = 8
+outer.top = 8
+outer.bottom = 8
+
+[mode.main.binding]
+# Intercept these Command shortcuts instead of passing them to applications.
+cmd-h = 'focus left'
+cmd-j = 'focus down'
+cmd-k = 'focus up'
+cmd-l = 'focus right'
+
+cmd-shift-h = 'move left'
+cmd-shift-j = 'move down'
+cmd-shift-k = 'move up'
+cmd-shift-l = 'move right'
+
+# Previous/next workspace on the focused monitor; stop at the ends.
+# cmd-alt-h also replaces macOS Hide Others.
+cmd-alt-h = 'workspace prev'
+cmd-alt-l = 'workspace next'
+cmd-alt-1 = 'workspace 1'
+cmd-alt-2 = 'workspace 2'
+cmd-alt-3 = 'workspace 3'
+
+# Move the window to an adjacent workspace and follow it.
+cmd-alt-shift-h = 'move-node-to-workspace --focus-follows-window prev'
+cmd-alt-shift-l = 'move-node-to-workspace --focus-follows-window next'
+
+# Match Hyprland's Super+Alt+Shift+number: move without following.
+cmd-alt-shift-1 = 'move-node-to-workspace 1'
+cmd-alt-shift-2 = 'move-node-to-workspace 2'
+cmd-alt-shift-3 = 'move-node-to-workspace 3'
