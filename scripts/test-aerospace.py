@@ -14,11 +14,17 @@ BASH = shutil.which('bash')
 
 config = tomllib.loads(SOURCE.read_text())
 bindings = config['mode']['main']['binding']
-assert config['persistent-workspaces'] == ['1', '2', '3']
+assert config['persistent-workspaces'] == []
+for workspace in range(1, 11):
+    key = workspace % 10
+    assert bindings[f'cmd-alt-{key}'] == f'workspace {workspace}'
+    assert bindings[f'cmd-alt-shift-{key}'] == f'move-node-to-workspace {workspace}'
 assert config['key-mapping']['preset'] == 'qwerty'
 assert bindings['cmd-h'] == 'focus left'
 assert bindings['cmd-alt-h'] == 'workspace prev'
 assert bindings['cmd-alt-l'] == 'workspace next'
+assert bindings['cmd-ctrl-h'] == 'move-workspace-to-monitor --wrap-around prev'
+assert bindings['cmd-ctrl-l'] == 'move-workspace-to-monitor --wrap-around next'
 # Preserve the ordinary application shortcuts the user chose to keep.
 for key in ['c', 'v', 's', 'z', 'a', 't', 'space', 'tab', 'f']:
     assert f'cmd-{key}' not in bindings

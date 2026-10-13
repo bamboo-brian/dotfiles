@@ -25,12 +25,14 @@ current configuration version 2; see the [AeroSpace guide](https://nikitabobko.g
 | --- | --- |
 | Command+H/J/K/L | Focus left/down/up/right |
 | Command+Shift+H/J/K/L | Move the window left/down/up/right |
+| Command+Control+H/L | Move the entire workspace to the previous/next monitor and follow |
 | Command+Option+H/L | Previous/next workspace on the focused monitor |
-| Command+Option+1/2/3 | Focus workspace 1/2/3 |
+| Command+Option+1–9 / 0 | Focus workspace 1–9 / 10 |
 | Command+Option+Shift+H/L | Move to previous/next workspace and follow |
-| Command+Option+Shift+1/2/3 | Move to workspace 1/2/3 without following |
+| Command+Option+Shift+1–9 / 0 | Move to workspace 1–9 / 10 without following |
 
-Three workspaces are kept available even when empty. Physical key positions
+Empty workspaces disappear when no longer visible; all ten number shortcuts
+recreate their workspaces on demand. Physical key positions
 use QWERTY notation, including number-row keys on AZERTY keyboards. Workspaces
 are AeroSpace workspaces, separate from native macOS Spaces. Monitor assignment
 is automatic; the config contains no machine-specific monitor names.
