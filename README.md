@@ -23,7 +23,7 @@ current configuration version 2; see the [AeroSpace guide](https://nikitabobko.g
 
 | Shortcut | Action |
 | --- | --- |
-| Command+H/J/K/L | Focus left/down/up/right |
+| Command+H/J/K/L | Focus left/down/up/right across monitors |
 | Command+Shift+H/J/K/L | Move the window left/down/up/right |
 | Command+Control+H/L | Move the entire workspace to the previous/next monitor and follow |
 | Command+Option+H/L | Previous/next workspace on the focused monitor |
@@ -36,6 +36,10 @@ recreate their workspaces on demand. Physical key positions
 use QWERTY notation, including number-row keys on AZERTY keyboards. Workspaces
 are AeroSpace workspaces, separate from native macOS Spaces. Monitor assignment
 is automatic; the config contains no machine-specific monitor names.
+
+Directional focus crosses monitor boundaries and stops at the outer screen
+edges. The pointer follows focus into the new window, staying put if already
+inside it. Empty workspaces use the monitor center as a fallback.
 
 These global bindings replace the corresponding app shortcuts while AeroSpace
 is active, including Hide Application, Hide Others, and Command+L for an address

@@ -20,7 +20,11 @@ for workspace in range(1, 11):
     assert bindings[f'cmd-alt-{key}'] == f'workspace {workspace}'
     assert bindings[f'cmd-alt-shift-{key}'] == f'move-node-to-workspace {workspace}'
 assert config['key-mapping']['preset'] == 'qwerty'
-assert bindings['cmd-h'] == 'focus left'
+for key, direction in [('h', 'left'), ('j', 'down'), ('k', 'up'), ('l', 'right')]:
+    assert bindings[f'cmd-{key}'] == f'focus --boundaries all-monitors-outer-frame {direction}'
+assert config['on-focus-changed'] == [
+    'move-mouse window-lazy-center || move-mouse monitor-lazy-center'
+]
 assert bindings['cmd-alt-h'] == 'workspace prev'
 assert bindings['cmd-alt-l'] == 'workspace next'
 assert bindings['cmd-ctrl-h'] == 'move-workspace-to-monitor --wrap-around prev'

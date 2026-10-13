@@ -8,6 +8,11 @@ default-root-container-orientation = 'auto'
 # Number shortcuts recreate them on demand.
 persistent-workspaces = []
 
+# Move the pointer into the focused window, or monitor on empty workspaces.
+on-focus-changed = [
+    'move-mouse window-lazy-center || move-mouse monitor-lazy-center'
+]
+
 # Bind physical key positions, including the number row on AZERTY keyboards.
 key-mapping.preset = 'qwerty'
 
@@ -21,10 +26,11 @@ outer.bottom = 8
 
 [mode.main.binding]
 # Intercept these Command shortcuts instead of passing them to applications.
-cmd-h = 'focus left'
-cmd-j = 'focus down'
-cmd-k = 'focus up'
-cmd-l = 'focus right'
+# Cross monitors in the requested direction; stop at the outer screen edges.
+cmd-h = 'focus --boundaries all-monitors-outer-frame left'
+cmd-j = 'focus --boundaries all-monitors-outer-frame down'
+cmd-k = 'focus --boundaries all-monitors-outer-frame up'
+cmd-l = 'focus --boundaries all-monitors-outer-frame right'
 
 cmd-shift-h = 'move left'
 cmd-shift-j = 'move down'
