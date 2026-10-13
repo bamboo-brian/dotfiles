@@ -8,6 +8,9 @@ default-root-container-orientation = 'auto'
 # Number shortcuts recreate them on demand.
 persistent-workspaces = []
 
+# Focus the window under the pointer as the mouse moves.
+focus-follows-mouse.enabled = true
+
 # Move the pointer into the focused window, or monitor on empty workspaces.
 on-focus-changed = [
     'move-mouse window-lazy-center || move-mouse monitor-lazy-center'
@@ -32,10 +35,10 @@ cmd-j = 'focus --boundaries all-monitors-outer-frame down'
 cmd-k = 'focus --boundaries all-monitors-outer-frame up'
 cmd-l = 'focus --boundaries all-monitors-outer-frame right'
 
-cmd-shift-h = 'move left'
-cmd-shift-j = 'move down'
-cmd-shift-k = 'move up'
-cmd-shift-l = 'move right'
+cmd-shift-h = 'move --boundaries all-monitors-outer-frame left'
+cmd-shift-j = 'move --boundaries all-monitors-outer-frame down'
+cmd-shift-k = 'move --boundaries all-monitors-outer-frame up'
+cmd-shift-l = 'move --boundaries all-monitors-outer-frame right'
 
 # Join the focused window with its neighbor in the requested direction.
 cmd-ctrl-h = 'join-with left'
@@ -46,6 +49,9 @@ cmd-ctrl-l = 'join-with right'
 # Move the entire focused workspace between monitors and follow it.
 cmd-ctrl-alt-h = 'move-workspace-to-monitor --wrap-around prev'
 cmd-ctrl-alt-l = 'move-workspace-to-monitor --wrap-around next'
+
+# Toggle fullscreen within the current AeroSpace workspace.
+cmd-alt-f = 'fullscreen'
 
 # Previous/next workspace on the focused monitor; stop at the ends.
 # cmd-alt-h also replaces macOS Hide Others.
@@ -66,14 +72,14 @@ cmd-alt-0 = 'workspace 10'
 cmd-alt-shift-h = 'move-node-to-workspace --focus-follows-window prev'
 cmd-alt-shift-l = 'move-node-to-workspace --focus-follows-window next'
 
-# Match Hyprland's Super+Alt+Shift+number: move without following.
-cmd-alt-shift-1 = 'move-node-to-workspace 1'
-cmd-alt-shift-2 = 'move-node-to-workspace 2'
-cmd-alt-shift-3 = 'move-node-to-workspace 3'
-cmd-alt-shift-4 = 'move-node-to-workspace 4'
-cmd-alt-shift-5 = 'move-node-to-workspace 5'
-cmd-alt-shift-6 = 'move-node-to-workspace 6'
-cmd-alt-shift-7 = 'move-node-to-workspace 7'
-cmd-alt-shift-8 = 'move-node-to-workspace 8'
-cmd-alt-shift-9 = 'move-node-to-workspace 9'
-cmd-alt-shift-0 = 'move-node-to-workspace 10'
+# Move to a numbered workspace and follow the window.
+cmd-alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
+cmd-alt-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
+cmd-alt-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
+cmd-alt-shift-4 = 'move-node-to-workspace --focus-follows-window 4'
+cmd-alt-shift-5 = 'move-node-to-workspace --focus-follows-window 5'
+cmd-alt-shift-6 = 'move-node-to-workspace --focus-follows-window 6'
+cmd-alt-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
+cmd-alt-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
+cmd-alt-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
+cmd-alt-shift-0 = 'move-node-to-workspace --focus-follows-window 10'

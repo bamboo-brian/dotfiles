@@ -15,18 +15,21 @@ BASH = shutil.which('bash')
 config = tomllib.loads(SOURCE.read_text())
 bindings = config['mode']['main']['binding']
 assert config['persistent-workspaces'] == []
+assert config['focus-follows-mouse']['enabled'] is True
 for workspace in range(1, 11):
     key = workspace % 10
     assert bindings[f'cmd-alt-{key}'] == f'workspace {workspace}'
-    assert bindings[f'cmd-alt-shift-{key}'] == f'move-node-to-workspace {workspace}'
+    assert bindings[f'cmd-alt-shift-{key}'] == f'move-node-to-workspace --focus-follows-window {workspace}'
 assert config['key-mapping']['preset'] == 'qwerty'
 for key, direction in [('h', 'left'), ('j', 'down'), ('k', 'up'), ('l', 'right')]:
     assert bindings[f'cmd-{key}'] == f'focus --boundaries all-monitors-outer-frame {direction}'
+    assert bindings[f'cmd-shift-{key}'] == f'move --boundaries all-monitors-outer-frame {direction}'
 assert config['on-focus-changed'] == [
     'move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ]
 assert bindings['cmd-alt-h'] == 'workspace prev'
 assert bindings['cmd-alt-l'] == 'workspace next'
+assert bindings['cmd-alt-f'] == 'fullscreen'
 for key, direction in [('h', 'left'), ('j', 'down'), ('k', 'up'), ('l', 'right')]:
     assert bindings[f'cmd-ctrl-{key}'] == f'join-with {direction}'
 assert bindings['cmd-ctrl-alt-h'] == 'move-workspace-to-monitor --wrap-around prev'

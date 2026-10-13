@@ -24,13 +24,14 @@ current configuration version 2; see the [AeroSpace guide](https://nikitabobko.g
 | Shortcut | Action |
 | --- | --- |
 | Command+H/J/K/L | Focus left/down/up/right across monitors |
-| Command+Shift+H/J/K/L | Move the window left/down/up/right |
+| Command+Shift+H/J/K/L | Move the window left/down/up/right across monitors |
 | Command+Control+H/J/K/L | Join the window with its neighbor left/down/up/right |
 | Command+Control+Option+H/L | Move the entire workspace to the previous/next monitor and follow |
+| Command+Option+F | Toggle AeroSpace fullscreen |
 | Command+Option+H/L | Previous/next workspace on the focused monitor |
 | Command+Option+1–9 / 0 | Focus workspace 1–9 / 10 |
 | Command+Option+Shift+H/L | Move to previous/next workspace and follow |
-| Command+Option+Shift+1–9 / 0 | Move to workspace 1–9 / 10 without following |
+| Command+Option+Shift+1–9 / 0 | Move to workspace 1–9 / 10 and follow |
 
 Empty workspaces disappear when no longer visible; all ten number shortcuts
 recreate their workspaces on demand. Physical key positions
@@ -41,6 +42,7 @@ is automatic; the config contains no machine-specific monitor names.
 Directional focus crosses monitor boundaries and stops at the outer screen
 edges. The pointer follows focus into the new window, staying put if already
 inside it. Empty workspaces use the monitor center as a fallback.
+Moving the mouse over a window also focuses it.
 
 These global bindings replace the corresponding app shortcuts while AeroSpace
 is active, including Hide Application, Hide Others, and Command+L for an address
