@@ -37,9 +37,15 @@ cmd-shift-j = 'move down'
 cmd-shift-k = 'move up'
 cmd-shift-l = 'move right'
 
+# Join the focused window with its neighbor in the requested direction.
+cmd-ctrl-h = 'join-with left'
+cmd-ctrl-j = 'join-with down'
+cmd-ctrl-k = 'join-with up'
+cmd-ctrl-l = 'join-with right'
+
 # Move the entire focused workspace between monitors and follow it.
-cmd-ctrl-h = 'move-workspace-to-monitor --wrap-around prev'
-cmd-ctrl-l = 'move-workspace-to-monitor --wrap-around next'
+cmd-ctrl-alt-h = 'move-workspace-to-monitor --wrap-around prev'
+cmd-ctrl-alt-l = 'move-workspace-to-monitor --wrap-around next'
 
 # Previous/next workspace on the focused monitor; stop at the ends.
 # cmd-alt-h also replaces macOS Hide Others.

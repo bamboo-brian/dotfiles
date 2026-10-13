@@ -25,7 +25,8 @@ current configuration version 2; see the [AeroSpace guide](https://nikitabobko.g
 | --- | --- |
 | Command+H/J/K/L | Focus left/down/up/right across monitors |
 | Command+Shift+H/J/K/L | Move the window left/down/up/right |
-| Command+Control+H/L | Move the entire workspace to the previous/next monitor and follow |
+| Command+Control+H/J/K/L | Join the window with its neighbor left/down/up/right |
+| Command+Control+Option+H/L | Move the entire workspace to the previous/next monitor and follow |
 | Command+Option+H/L | Previous/next workspace on the focused monitor |
 | Command+Option+1–9 / 0 | Focus workspace 1–9 / 10 |
 | Command+Option+Shift+H/L | Move to previous/next workspace and follow |

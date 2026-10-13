@@ -27,8 +27,10 @@ assert config['on-focus-changed'] == [
 ]
 assert bindings['cmd-alt-h'] == 'workspace prev'
 assert bindings['cmd-alt-l'] == 'workspace next'
-assert bindings['cmd-ctrl-h'] == 'move-workspace-to-monitor --wrap-around prev'
-assert bindings['cmd-ctrl-l'] == 'move-workspace-to-monitor --wrap-around next'
+for key, direction in [('h', 'left'), ('j', 'down'), ('k', 'up'), ('l', 'right')]:
+    assert bindings[f'cmd-ctrl-{key}'] == f'join-with {direction}'
+assert bindings['cmd-ctrl-alt-h'] == 'move-workspace-to-monitor --wrap-around prev'
+assert bindings['cmd-ctrl-alt-l'] == 'move-workspace-to-monitor --wrap-around next'
 # Preserve the ordinary application shortcuts the user chose to keep.
 for key in ['c', 'v', 's', 'z', 'a', 't', 'space', 'tab', 'f']:
     assert f'cmd-{key}' not in bindings
