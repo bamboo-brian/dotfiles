@@ -23,7 +23,7 @@ for workspace in range(1, 11):
 assert config['key-mapping']['preset'] == 'qwerty'
 for key, direction in [('h', 'left'), ('j', 'down'), ('k', 'up'), ('l', 'right')]:
     assert bindings[f'cmd-{key}'] == f'focus --boundaries all-monitors-outer-frame {direction}'
-    assert bindings[f'cmd-shift-{key}'] == f'move --boundaries all-monitors-outer-frame {direction}'
+    assert f'--boundaries all-monitors-outer-frame {direction}' in bindings[f'cmd-shift-{key}']
 assert config['on-focus-changed'] == [
     'move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ]
@@ -74,6 +74,53 @@ with tempfile.TemporaryDirectory(prefix='dotfiles-aerospace-test-') as temp:
         env, home, _ = environment(name, system, installed)
         install(env)
         assert not list(home.iterdir()), 'Skipped install changed the home directory'
+
+    env, home, _ = environment('move-follow')
+    cli = bin_dir / 'aerospace'
+    cli.write_text("""#!/bin/sh
+printf '%s\\n' "$*" >> "$AEROSPACE_TEST_LOG"
+case "$1" in
+  list-windows)
+    case "$AEROSPACE_TEST_CASE" in
+      empty) exit 0 ;;
+      *) printf '123\\n' ;;
+    esac ;;
+  move)
+    if [ "$AEROSPACE_TEST_CASE" = failed ]; then exit 1; fi
+    printf '456\\n' > "$AEROSPACE_TEST_FOCUS" ;;
+  focus) printf '%s\\n' "$3" > "$AEROSPACE_TEST_FOCUS" ;;
+  move-mouse)
+    IFS= read -r focused < "$AEROSPACE_TEST_FOCUS"
+    [ "$focused" = 123 ] || exit 1 ;;
+esac
+""")
+    cli.chmod(0o755)
+    log = home / 'commands.log'
+    focus = home / 'focus.txt'
+    env.update(AEROSPACE_TEST_LOG=str(log), AEROSPACE_TEST_FOCUS=str(focus))
+    for key, direction in [('h', 'left'), ('j', 'down'), ('k', 'up'), ('l', 'right')]:
+        binding = bindings[f'cmd-shift-{key}']
+        assert binding.startswith('exec-and-forget ')
+        script = binding[len('exec-and-forget'):].lstrip()
+        for scenario in ['swapped', 'empty', 'failed']:
+            log.write_text('')
+            focus.write_text('123\n')
+            env['AEROSPACE_TEST_CASE'] = scenario
+            result = subprocess.run([BASH, '-c', script], env=env, capture_output=True, text=True)
+            commands = log.read_text().splitlines()
+            assert commands[0] == 'list-windows --focused --format %{window-id}'
+            if scenario == 'empty':
+                assert len(commands) == 1
+            elif scenario == 'failed':
+                assert result.returncode != 0 and len(commands) == 2
+            else:
+                assert result.returncode == 0, result.stderr
+                assert commands[1:] == [
+                    f'move --window-id 123 --boundaries all-monitors-outer-frame {direction}',
+                    'focus --window-id 123',
+                    'move-mouse window-lazy-center',
+                ]
+                assert focus.read_text() == '123\n'
 
     env, home, _ = environment('fresh')
     install(env)

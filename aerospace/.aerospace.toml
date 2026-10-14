@@ -35,10 +35,31 @@ cmd-j = 'focus --boundaries all-monitors-outer-frame down'
 cmd-k = 'focus --boundaries all-monitors-outer-frame up'
 cmd-l = 'focus --boundaries all-monitors-outer-frame right'
 
-cmd-shift-h = 'move --boundaries all-monitors-outer-frame left'
-cmd-shift-j = 'move --boundaries all-monitors-outer-frame down'
-cmd-shift-k = 'move --boundaries all-monitors-outer-frame up'
-cmd-shift-l = 'move --boundaries all-monitors-outer-frame right'
+# Save the original window ID so focus-follows-mouse cannot change the target.
+cmd-shift-h = '''exec-and-forget window_id="$(aerospace list-windows --focused --format '%{window-id}')" || exit
+[ -n "$window_id" ] || exit
+aerospace move --window-id "$window_id" --boundaries all-monitors-outer-frame left &&
+aerospace focus --window-id "$window_id" &&
+aerospace move-mouse window-lazy-center
+'''
+cmd-shift-j = '''exec-and-forget window_id="$(aerospace list-windows --focused --format '%{window-id}')" || exit
+[ -n "$window_id" ] || exit
+aerospace move --window-id "$window_id" --boundaries all-monitors-outer-frame down &&
+aerospace focus --window-id "$window_id" &&
+aerospace move-mouse window-lazy-center
+'''
+cmd-shift-k = '''exec-and-forget window_id="$(aerospace list-windows --focused --format '%{window-id}')" || exit
+[ -n "$window_id" ] || exit
+aerospace move --window-id "$window_id" --boundaries all-monitors-outer-frame up &&
+aerospace focus --window-id "$window_id" &&
+aerospace move-mouse window-lazy-center
+'''
+cmd-shift-l = '''exec-and-forget window_id="$(aerospace list-windows --focused --format '%{window-id}')" || exit
+[ -n "$window_id" ] || exit
+aerospace move --window-id "$window_id" --boundaries all-monitors-outer-frame right &&
+aerospace focus --window-id "$window_id" &&
+aerospace move-mouse window-lazy-center
+'''
 
 # Join the focused window with its neighbor in the requested direction.
 cmd-ctrl-h = 'join-with left'

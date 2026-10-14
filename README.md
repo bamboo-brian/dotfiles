@@ -43,6 +43,8 @@ Directional focus crosses monitor boundaries and stops at the outer screen
 edges. The pointer follows focus into the new window, staying put if already
 inside it. Empty workspaces use the monitor center as a fallback.
 Moving the mouse over a window also focuses it.
+Command+Shift movement saves the original window ID and restores focus to that
+window before moving the pointer, even if a swap temporarily changes focus.
 
 These global bindings replace the corresponding app shortcuts while AeroSpace
 is active, including Hide Application, Hide Others, and Command+L for an address
